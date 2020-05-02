@@ -29,4 +29,21 @@ public class Main1Test {
         assertEquals("NO", Main1.chocolateDivide(5, 12, 100));
     }
 
+    @Test
+    public void shouldCollatzConjecture() {
+
+        assertEquals("1", Main1.collatzConjecture(1));
+        assertEquals("10 5 16 8 4 2 1", Main1.collatzConjecture(10));
+        assertEquals("7 22 11 34 17 52 26 13 40 20 10 5 16 8 4 2 1", Main1.collatzConjecture(7));
+        assertEquals("3 10 5 16 8 4 2 1", Main1.collatzConjecture(3));
+    }
+
+    @Test
+    public void shouldCalculatorWork() {
+
+        assertEquals(0, Main1.interestCalculator(100, 100, 100));
+        assertEquals(3, Main1.interestCalculator(1, 100, 8));
+        assertEquals(2, Main1.interestCalculator(100, 15, 120));
+    }
+
 }

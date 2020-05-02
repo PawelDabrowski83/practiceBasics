@@ -56,5 +56,44 @@ public class Main1 {
         }
 
     }
+
+    public static String collatzConjecture(int number) {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append(number);
+
+        do {
+            if (number != 1) {
+                builder.append(" ");
+
+                if (number % 2 == 0) {
+                    number /= 2;
+                } else {
+                    number *= 3;
+                    number++;
+                }
+
+
+                builder.append(number);
+            }
+        } while (number != 1);
+
+        return builder.toString();
+    }
+
+    public static int interestCalculator(int base, int percentage, int threshold) {
+        double sum = base;
+        int count = 0;
+
+        do {
+            if (base != threshold) {
+                count++;
+                sum += sum * (double) percentage / 100;
+            }
+        } while (sum < threshold);
+        return count;
+    }
+
+    
 }
 
