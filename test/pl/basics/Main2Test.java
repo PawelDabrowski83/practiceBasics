@@ -30,4 +30,13 @@ public class Main2Test {
         assertEquals("Unknown", Main2.getFullname("", ""));
         assertEquals("lastName", Main2.getFullname(null, "lastName"));
     }
+
+    @Test
+    public void shouldFactorialStringWork() {
+
+        assertEquals("1", Main2.factorialString(1));
+        assertEquals("2", Main2.factorialString(2));
+        assertEquals("6", Main2.factorialString(3));
+        assertEquals("24", Main2.factorialString(4));
+    }
 }
