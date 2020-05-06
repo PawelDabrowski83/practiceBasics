@@ -25,18 +25,19 @@ public class Main4 {
         private Account[] accounts;
 
         public AccountServiceImpl(Account[] accounts) {
-            this.accounts = accounts;
+            if (accounts != null) {
+                this.accounts = Arrays.copyOf(accounts, accounts.length);
+            }
         }
 
         public Account findAccountByOwnerId(long id) {
 
-            Long idWrapped = id;
-            return Arrays.stream(accounts).filter(n -> idWrapped.equals(n.getOwner().getId())).findAny().orElse(null);
+            return Arrays.stream(this.accounts).filter(n -> n.getOwner().getId() == id).findAny().orElse(null);
         }
 
         public long countAccountsWithBalanceGreaterThan(long value) {
 
-            return Arrays.stream(accounts).filter(n -> n.getBalance() > value).count();
+            return Arrays.stream(this.accounts).filter(n -> n.getBalance() > value).count();
         }
     }
 
