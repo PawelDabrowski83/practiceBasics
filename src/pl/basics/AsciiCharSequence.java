@@ -4,10 +4,12 @@ import java.util.Arrays;
 
 public class AsciiCharSequence implements CharSequence {
 
-    private final byte[] bytes;
+    private byte[] bytes;
 
     public AsciiCharSequence(byte[] bytes) {
-        this.bytes = Arrays.copyOf(bytes, bytes.length);
+        if (bytes != null) {
+            this.bytes = Arrays.copyOf(bytes, bytes.length);
+        }
     }
 
     @Override
