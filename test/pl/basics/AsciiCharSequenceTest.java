@@ -74,5 +74,6 @@ public class AsciiCharSequenceTest {
         // then
         assertEquals(expectedString, actualString);
         assertNotEquals(expectedString, "");
+        assertEquals("bpnooc{", actualString);
     }
 }
