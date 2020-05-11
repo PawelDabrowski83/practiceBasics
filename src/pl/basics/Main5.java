@@ -18,11 +18,11 @@ public class Main5 {
     //                return Math.toIntExact(val);
     //            }
     //        }
+
         return (int) (val == null ? 0 :
                 val > Integer.MAX_VALUE ? Integer.MAX_VALUE :
                 val < Integer.MIN_VALUE ? Integer.MIN_VALUE :
                         val);
-
 
     }
 }
