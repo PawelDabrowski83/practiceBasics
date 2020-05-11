@@ -37,7 +37,9 @@ public class Main8 {
         public static Set<Integer> removeAllNumbersGreaterThan10(Set<Integer> set) {
 
             return set == null || set.isEmpty() ? new HashSet<>() :
-                    set.stream().filter(n -> n <= 10).collect(Collectors.toSet());
+                    set.stream()
+                            .filter(n -> n <= 10)
+                            .collect(Collectors.toSet());
         }
     }
 
