@@ -63,4 +63,18 @@ public class Main7Test {
         assertEquals(phonesExpected, phonesActual);
     }
 
+    @Test
+    public void shouldFilterPhonesWorkGivenPhonesEmpty() {
+
+        // given
+        phones = new ArrayList<>();
+        phonesExpected = new ArrayList<>();
+
+        // when
+        phonesActual = Main7.CollectionUtils.filterPhones(phones, blocklist);
+
+        // then
+        assertEquals(phonesExpected, phonesActual);
+    }
+
 }
