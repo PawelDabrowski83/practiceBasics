@@ -1,9 +1,9 @@
 package pl.basics;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Main9 {
@@ -37,17 +37,26 @@ public class Main9 {
         if (str == null || str.isEmpty()) {
             return "";
         }
+        if (cipher == null || cipher.isEmpty()) {
+            return str;
+        }
 
-        Set<Character> results = new LinkedHashSet<>();
+        List<Character> results = new ArrayList<>();
 
         for (char c : str.toCharArray()) {
             results.add(cipher.getOrDefault(c, c));
         }
-        return results.stream().toString();
+        return results.stream().map(Object::toString).collect(Collectors.joining());
     }
 
     public static String decode(String str, Map<Character, Character> cipher) {
 
+        if (str == null || str.isEmpty()) {
+            return "";
+        }
+        if (cipher == null || cipher.isEmpty()) {
+            return str;
+        }
         Map<Character, Character> swapped = cipher.entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
 

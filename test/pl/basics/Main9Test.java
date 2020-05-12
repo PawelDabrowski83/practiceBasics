@@ -17,6 +17,7 @@ public class Main9Test {
     Map<Character, Character> cipher;
     Map<Character, Character> cipherExpected;
     Map<Character, Character> cipherActual;
+    String str;
     String messageExpected;
     String messageActual;
 
@@ -86,5 +87,130 @@ public class Main9Test {
 
         //when
         cipherActual = Main9.getCipher(key, value);
+    }
+
+    @Test
+    public void shouldEncodeWork() {
+
+        // given
+        str = "abcdefgh";
+        messageExpected = "zyxwefgh";
+
+        // when
+        messageActual = Main9.encode(str, cipher);
+
+        // then
+        assertEquals(messageExpected, messageActual);
+    }
+
+    @Test
+    public void shouldEncodeGivenNullReturnEmpty() {
+
+        // given
+        str = null;
+        messageExpected = "";
+
+        // when
+        messageActual = Main9.encode(str, cipher);
+
+        // then
+        assertEquals(messageExpected, messageActual);
+    }
+
+    @Test
+    public void shouldEncodeGivenEmptyReturnEmpty() {
+
+        // given
+        str = "";
+        messageExpected = "";
+
+        // when
+        messageActual = Main9.encode(str, cipher);
+
+        // then
+        assertEquals(messageExpected, messageActual);
+    }
+
+    @Test
+    public void shouldEncodeGivenWorthlessCipherReturnMessage() {
+
+        // given
+        str = "abcd efgh";
+        cipher = Stream.of(new Character[][] {
+                { 'a', 'a' },
+                { 'b', 'b' },
+                { 'c', 'c' },
+                { 'd', 'd' },
+        }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
+        messageExpected = new String(str);
+
+        // when
+        messageActual = Main9.encode(str, cipher);
+
+        // then
+        assertEquals(messageExpected, messageActual);
+    }
+
+    @Test
+    public void shouldEncodeGivenNotUsefulCipherReturnMessage() {
+
+        // given
+        str = "ab cd ef gh";
+        cipher = Stream.of(new Character[][] {
+                { 's', 'u' },
+                { 'r', 't' },
+                { 'q', 'm' },
+                { 'p', 'n' },
+        }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
+        messageExpected = new String(str);
+
+        // when
+        messageActual = Main9.encode(str, cipher);
+
+        // then
+        assertEquals(messageExpected, messageActual);
+    }
+
+    @Test
+    public void shouldEncodeGivenNullCipherReturnMessage() {
+
+        // given
+        str = "ab ab bada";
+        cipher = null;
+        messageExpected = new String(str);
+
+        // when
+        messageActual = Main9.encode(str, cipher);
+
+        // then
+        assertEquals(messageExpected, messageActual);
+    }
+
+    @Test
+    public void shouldDecodeWork() {
+
+        // given
+        str = "zyxw vuts";
+        messageExpected = "abcd vuts";
+
+        // when
+        messageActual = Main9.decode(str, cipher);
+
+        // then
+        assertEquals(messageExpected, messageActual);
+    }
+
+    @Test
+    public void shouldDecodeGivenNullStringReturnEmpty() {
+
+        // given
+        str = null;
+        messageExpected = "";
+
+        // when
+        messageActual = Main9.decode(str, cipher);
+
+        // then
+        assertEquals(messageExpected, messageActual);
     }
 }
