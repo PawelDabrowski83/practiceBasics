@@ -24,6 +24,6 @@ public class Main10 {
             wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
         }
 
-        wordCount.entrySet().stream().map(n -> n.getKey() + " " + n.getValue()).forEach(System.out::println);
+        wordCount.forEach((key, value) -> System.out.println(key + " " + value));
     }
 }
