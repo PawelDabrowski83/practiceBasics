@@ -1,6 +1,7 @@
 package pl.basics;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
@@ -28,8 +29,9 @@ public class Main11 {
                 return new TreeMap<>();
             }
 
-            int first = map.keySet().stream().findFirst().get();
-            Map<Integer, String> subMap = new TreeMap<>();
+            int first = map.keySet().stream().min(Comparator.naturalOrder()).get();
+            int last = map.keySet().stream().max(Comparator.naturalOrder()).get();
+            TreeMap<Integer, String> subMap = new TreeMap<>();
 
             if (first % 2 == 0) {
                 // even
