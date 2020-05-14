@@ -2,11 +2,13 @@ package pl.basics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main14 {
 /*
@@ -55,6 +57,9 @@ Sample Output 3:
         try (Scanner scanner = new Scanner(System.in)) {
             input = getNumbersFromScanner(scanner);
         };
+        int[] result = getLowestSeedMaximum(input);
+        System.out.println(result[0]);
+        System.out.println(result[1]);
 
 
     }
@@ -103,7 +108,7 @@ Sample Output 3:
         if (input == null) {
             return new int[]{0, 0};
         }
-        int seedRange = input.seedTo - input.seedFrom + 1;
+        int seedRange = input.seedTo;// - input.seedFrom + 1;
 
         Random random = new Random();
         Map<Integer, List<Integer>> maxMap = new HashMap<>();
@@ -119,18 +124,18 @@ Sample Output 3:
             System.out.println(i + " : " + Arrays.toString(randomPool.toArray()));
         }
 
-        int lowestMaximum = maxMap.entrySet().stream()
-                .map(n -> n.getValue().stream()
-                        .max(Integer::compareTo)
-                        .get())
-                .min(Integer::compareTo)
-                .get();
+        int lowestMaximumSeed =
+                maxMap.entrySet().stream().collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        e -> e.getValue().stream().max(Integer::compareTo).get()))
+                        .entrySet().stream().min(Comparator.comparingInt(Map.Entry::getValue)).get().getKey();
+        int lowestMaximum = maxMap.entrySet().stream().map(e -> e.getValue().stream().max(Comparator.naturalOrder()).get()).min(Comparator.naturalOrder()).get();
+
+                        System.out.println("lowest: " + lowestMaximumSeed + " " + lowestMaximum);
 
 
-        System.out.println("lowest: " + lowestMaximum);
 
 
-
-        return new int[0];
+        return new int[]{lowestMaximumSeed, lowestMaximum};
     }
 }
