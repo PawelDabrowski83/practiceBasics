@@ -1,11 +1,12 @@
 package pl.basics;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Main14 {
 /*
@@ -105,17 +106,30 @@ Sample Output 3:
         int seedRange = input.seedTo - input.seedFrom + 1;
 
         Random random = new Random();
-        Map<Integer, Set<Integer>> maxMap = new HashMap<>();
-        Set<Integer> randomPool = new HashSet<>();
+        Map<Integer, List<Integer>> maxMap = new HashMap<>();
+        List<Integer> randomPool;
 
         for (int i = input.seedFrom; i < seedRange; i++) {
             random = new Random(i);
+            randomPool = new ArrayList<>();
             for (int j = 0; j < input.count; j++) {
-                randomPool = new HashSet<>();
                 randomPool.add(random.nextInt(input.randLimit));
             }
             maxMap.put(i, randomPool);
+            System.out.println(i + " : " + Arrays.toString(randomPool.toArray()));
         }
+
+        int lowestMaximum = maxMap.entrySet().stream()
+                .map(n -> n.getValue().stream()
+                        .max(Integer::compareTo)
+                        .get())
+                .min(Integer::compareTo)
+                .get();
+
+
+        System.out.println("lowest: " + lowestMaximum);
+
+
 
         return new int[0];
     }
