@@ -4,10 +4,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Main16_menu {
 
@@ -28,6 +31,10 @@ public class Main16_menu {
     private static final Pattern CARD_DEFINITION_PATTERN = Pattern.compile("^\"(.+)\":\"(.+)\"$");
     private static final String EXPORT_CARD = "File name:";
     private static final String EXPORT_SUCCESS = "%d cards have been saved.";
+    private static final String ASK_HOW_MANY = "How many times to ask?";
+    private static final String ASK_QUESTION = "Print the definition of \"%s\":";
+    private static final String ASK_QUESTION_CORRECT = "Correct answer.";
+    private static final String ASK_QUESTION_FAIL = "Wrong answer. The correct one is \"%s\", you've just written the definition of \"%s\".";
 
     public static void main(String[] args) {
 
@@ -38,7 +45,7 @@ public class Main16_menu {
 
         try (Scanner scanner = new Scanner(file)) {
             String input = "";
-            while (scanner.hasNextLine()) {
+            while (scanner.hasNextLine() && !"exit".equalsIgnoreCase(input)) {
                 input = scanner.nextLine().trim().toLowerCase();
 
                 switch (input) {
@@ -55,7 +62,7 @@ public class Main16_menu {
                         exportCards(scanner, cards);
                         break;
                     case "ask":
-
+                        askQuestion(scanner, cards);
                         break;
                     case "exit":
                         System.out.println(EXIT_MESSAGE);
@@ -155,5 +162,37 @@ public class Main16_menu {
             return;
         }
         System.out.printf(EXPORT_SUCCESS, count);
+    }
+
+    public static void askQuestion(Scanner scanner, Map<String, String> cards) {
+
+        System.out.println(ASK_HOW_MANY);
+
+        int number = 0;
+        while (!scanner.hasNextInt()) {
+            System.out.println(ASK_HOW_MANY);
+            scanner.nextLine();
+        }
+        number = scanner.nextInt();
+        Random random = new Random();
+        Iterator<Map.Entry<String, String>> iterator = cards.entrySet().iterator();
+
+        while (number > 0 && iterator.hasNext()) {
+            Map.Entry<String, String> entry = iterator.next();
+            System.out.printf(ASK_QUESTION, entry.getKey());
+            String answer = scanner.nextLine();
+
+            if (entry.getValue().equalsIgnoreCase(answer)) {
+                System.out.println(ASK_QUESTION_CORRECT);
+            } else if (cards.containsValue(answer)) {
+                String cardFoundByDefinition = cards.entrySet().stream()
+                        .filter(n -> n.getValue().equalsIgnoreCase(answer))
+                        .map(Map.Entry::getKey)
+                        .collect(Collectors.joining());
+                System.out.printf(ASK_QUESTION_FAIL, entry.getValue(), cardFoundByDefinition);
+            }
+        }
+
+
     }
 }
