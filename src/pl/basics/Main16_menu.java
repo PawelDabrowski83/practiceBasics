@@ -37,7 +37,7 @@ public class Main16_menu {
                         addCard(scanner, cards);
                         break;
                     case "remove":
-
+                        removeCard(scanner, cards);
                         break;
                     case "import":
 
@@ -92,5 +92,16 @@ public class Main16_menu {
     public static void removeCard(Scanner scanner, Map<String, String> cards) {
 
         System.out.println(REMOVE_CARD);
+        String card = scanner.nextLine().trim().toLowerCase();
+
+        while (card.isEmpty() || !cards.containsKey(card)) {
+            if (card.isEmpty()) {
+                System.out.println(REMOVE_CARD);
+            } else {
+                System.out.printf(CARD_NOT_EXISTING, card);
+                return;
+            }
+            System.out.println(CARD_REMOVED);
+        }
     }
 }
