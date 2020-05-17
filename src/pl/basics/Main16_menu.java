@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,6 +33,7 @@ public class Main16_menu {
     private static final String ASK_QUESTION = "Print the definition of \"%s\":" + System.lineSeparator();
     private static final String ASK_QUESTION_CORRECT = "Correct answer.";
     private static final String ASK_QUESTION_FAIL = "Wrong answer. The correct one is \"%s\", you've just written the definition of \"%s\"." + System.lineSeparator();
+    private static final String ASK_QUESTION_WRONG = "Wrong answer. The correct one is \"%s\"." + System.lineSeparator();
 
     public static void main(String[] args) {
 
@@ -137,7 +138,7 @@ public class Main16_menu {
                 if (newLine.matches(CARD_DEFINITION_PATTERN.pattern())) {
                     Matcher matcher = CARD_DEFINITION_PATTERN.matcher(newLine);
                     matcher.matches(); // necessary to check matcher.group
-                    cards.put(matcher.group(0), matcher.group(1));
+                    cards.put(matcher.group(1), matcher.group(2));
                     count++;
                 }
             }
@@ -156,9 +157,10 @@ public class Main16_menu {
         File file = new File(fileName);
         int count = 0;
 
-        try (FileWriter fileWriter = new FileWriter(file, true)) {
+        try (FileWriter fileWriter = new FileWriter(file)) {
             for (Map.Entry<String, String> record : cards.entrySet()) {
                 fileWriter.write("\"" + record.getKey() + "\":\"" + record.getValue() + "\"" + System.lineSeparator());
+                fileWriter.flush();
                 count++;
             }
         } catch (IOException e) {
@@ -173,35 +175,46 @@ public class Main16_menu {
 
         System.out.println(ASK_HOW_MANY);
 
+        String numberAsString = scanner.nextLine().trim();
         int number = 0;
-        // while (!scanner.hasNextInt()) {
-        //     System.out.println(ASK_HOW_MANY);
-        //     scanner.nextLine();
-        // }
-        number = scanner.nextInt();
-        Iterator<Map.Entry<String, String>> iterator = cards.entrySet().iterator();
+        try {
+            number = Integer.parseInt(numberAsString);
+        } catch (NumberFormatException e) {
+            System.out.println("Cannot parse " + numberAsString);
+        }
 
-        while (number > 0 && iterator.hasNext() && scanner.hasNextLine()) {
-            Map.Entry<String, String> entry = iterator.next();
-            System.out.printf(ASK_QUESTION, entry.getKey());
-            String answer = scanner.nextLine();
+        Map<Integer, String> auxilaryMap = new HashMap<>();
 
-            if (entry.getValue().equalsIgnoreCase(answer)) {
+        int counter = 0;
+        for (String key : cards.keySet()) {
+            auxilaryMap.put(counter, key);
+            counter++;
+        }
+//        Iterator<Map.Entry<Integer, String>> iterator = auxilaryMap.entrySet().iterator();
+        Random random = new Random();
+
+        while (number > 0) {
+            int randomized = random.nextInt(counter);
+            String cardEntry = auxilaryMap.get(randomized);
+            String definitionEntry = cards.get(cardEntry);
+
+            System.out.printf(ASK_QUESTION, cardEntry);
+            String answer = scanner.nextLine().trim();
+
+            if (definitionEntry.equalsIgnoreCase(answer)) {
                 System.out.println(ASK_QUESTION_CORRECT);
             } else if (cards.containsValue(answer)) {
                 String cardFoundByDefinition = cards.entrySet().stream()
                         .filter(n -> n.getValue().equalsIgnoreCase(answer))
                         .map(Map.Entry::getKey)
                         .collect(Collectors.joining());
-                System.out.printf(ASK_QUESTION_FAIL, entry.getValue(), cardFoundByDefinition);
+                System.out.printf(ASK_QUESTION_FAIL, definitionEntry, cardFoundByDefinition);
             } else {
-                System.out.println();
+                System.out.printf(ASK_QUESTION_WRONG, definitionEntry);
             }
             number--;
 
-            int[] numbers = new int[]{4, 3, 1, 10, 9};
-
         }
-        //System.out.println(COMMAND_LINE);
+        System.out.println(COMMAND_LINE);
     }
 }
