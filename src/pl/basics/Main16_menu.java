@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,26 +14,25 @@ import java.util.stream.Collectors;
 public class Main16_menu {
 
     private static final String COMMAND_LINE = "Input the action (add, remove, import, export, ask, exit):";
-    private static final String[] OPERATIONS = {"add", "remove", "import", "export", "ask", "exit"};
     private static final String EXIT_MESSAGE = "Bye bye!";
     private static final String ADD_CARD = "The card:";
-    private static final String CARD_DUPLICATE = "The card \"%s\" already exists.";
+    private static final String CARD_DUPLICATE = "The card \"%s\" already exists." + System.lineSeparator();
     private static final String ADD_DEFINITION = "The definition of the card:";
-    private static final String DEFINITION_DUPLICATE = "The definition \"%s\" already exists.";
-    private static final String CARD_ADDED = "The pair (\"%s\":\"%s\") has been added.";
+    private static final String DEFINITION_DUPLICATE = "The definition \"%s\" already exists." + System.lineSeparator();
+    private static final String CARD_ADDED = "The pair (\"%s\":\"%s\") has been added." + System.lineSeparator();
     private static final String REMOVE_CARD = "The card:";
     private static final String CARD_REMOVED = "The card has been removed.";
-    private static final String CARD_NOT_EXISTING = "Can't remove \"%s\": there is no such card.";
+    private static final String CARD_NOT_EXISTING = "Can't remove \"%s\": there is no such card." + System.lineSeparator();
     private static final String IMPORT_CARD = "File name:";
     private static final String IMPORT_FAIL = "File not found.";
-    private static final String IMPORT_SUCCESS = "%d cards have been loaded.";
-    private static final Pattern CARD_DEFINITION_PATTERN = Pattern.compile("^\"(.+)\":\"(.+)\"$");
+    private static final String IMPORT_SUCCESS = "%d cards have been loaded." + System.lineSeparator();
+    private static final Pattern CARD_DEFINITION_PATTERN = Pattern.compile("\"(.+)\":\"(.+)\"");
     private static final String EXPORT_CARD = "File name:";
-    private static final String EXPORT_SUCCESS = "%d cards have been saved.";
+    private static final String EXPORT_SUCCESS = "%d cards have been saved." + System.lineSeparator();
     private static final String ASK_HOW_MANY = "How many times to ask?";
-    private static final String ASK_QUESTION = "Print the definition of \"%s\":";
+    private static final String ASK_QUESTION = "Print the definition of \"%s\":" + System.lineSeparator();
     private static final String ASK_QUESTION_CORRECT = "Correct answer.";
-    private static final String ASK_QUESTION_FAIL = "Wrong answer. The correct one is \"%s\", you've just written the definition of \"%s\".";
+    private static final String ASK_QUESTION_FAIL = "Wrong answer. The correct one is \"%s\", you've just written the definition of \"%s\"." + System.lineSeparator();
 
     public static void main(String[] args) {
 
@@ -43,7 +41,7 @@ public class Main16_menu {
         Map<String, String> cards = new HashMap<>();
         System.out.println(COMMAND_LINE);
 
-        try (Scanner scanner = new Scanner(file)) {
+        try (Scanner scanner = new Scanner(System.in)) {
             String input = "";
             while (scanner.hasNextLine() && !"exit".equalsIgnoreCase(input)) {
                 input = scanner.nextLine().trim().toLowerCase();
@@ -71,8 +69,6 @@ public class Main16_menu {
                         System.out.println(COMMAND_LINE);
                 }
             }
-        } catch (IOException e) {
-            System.out.println("File not found.");
         }
     }
 
@@ -86,6 +82,8 @@ public class Main16_menu {
                 System.out.println(ADD_CARD);
             } else {
                 System.out.printf(CARD_DUPLICATE, card);
+                System.out.println(COMMAND_LINE);
+                return;
             }
             card = scanner.nextLine().trim().toLowerCase();
         }
@@ -93,16 +91,19 @@ public class Main16_menu {
         System.out.println(ADD_DEFINITION);
         String definition = scanner.nextLine().trim().toLowerCase();
 
-        while (definition.isEmpty() || cards.containsValue(definition)) {
+        if (definition.isEmpty() || cards.containsValue(definition)) {
             if (definition.isEmpty()) {
                 System.out.println(ADD_DEFINITION);
             } else {
                 System.out.printf(DEFINITION_DUPLICATE, definition);
+                System.out.println(COMMAND_LINE);
+                return;
             }
             definition = scanner.nextLine().trim().toLowerCase();
         }
         cards.put(card, definition);
         System.out.printf(CARD_ADDED, card, definition);
+        System.out.println(COMMAND_LINE);
     }
 
     public static void removeCard(Scanner scanner, Map<String, String> cards) {
@@ -110,7 +111,7 @@ public class Main16_menu {
         System.out.println(REMOVE_CARD);
         String card = scanner.nextLine().trim().toLowerCase();
 
-        while (card.isEmpty() || !cards.containsKey(card)) {
+        if (card.isEmpty() || !cards.containsKey(card)) {
             if (card.isEmpty()) {
                 System.out.println(REMOVE_CARD);
             } else {
@@ -119,6 +120,7 @@ public class Main16_menu {
             }
             System.out.println(CARD_REMOVED);
         }
+        System.out.println(COMMAND_LINE);
     }
 
     public static void importCards(Scanner scanner, Map<String, String> cards) {
@@ -132,8 +134,9 @@ public class Main16_menu {
         try (Scanner fileScanner = new Scanner(file)) {
             while (fileScanner.hasNextLine()) {
                 String newLine = fileScanner.nextLine();
-                Matcher matcher = CARD_DEFINITION_PATTERN.matcher(newLine);
                 if (newLine.matches(CARD_DEFINITION_PATTERN.pattern())) {
+                    Matcher matcher = CARD_DEFINITION_PATTERN.matcher(newLine);
+                    matcher.matches(); // necessary to check matcher.group
                     cards.put(matcher.group(0), matcher.group(1));
                     count++;
                 }
@@ -142,6 +145,7 @@ public class Main16_menu {
         } catch (IOException e) {
             System.out.println(IMPORT_FAIL);
         }
+        System.out.println(COMMAND_LINE);
     }
 
     public static void exportCards(Scanner scanner, Map<String, String> cards) {
@@ -162,6 +166,7 @@ public class Main16_menu {
             return;
         }
         System.out.printf(EXPORT_SUCCESS, count);
+        System.out.println(COMMAND_LINE);
     }
 
     public static void askQuestion(Scanner scanner, Map<String, String> cards) {
@@ -169,15 +174,14 @@ public class Main16_menu {
         System.out.println(ASK_HOW_MANY);
 
         int number = 0;
-        while (!scanner.hasNextInt()) {
-            System.out.println(ASK_HOW_MANY);
-            scanner.nextLine();
-        }
+        // while (!scanner.hasNextInt()) {
+        //     System.out.println(ASK_HOW_MANY);
+        //     scanner.nextLine();
+        // }
         number = scanner.nextInt();
-        Random random = new Random();
         Iterator<Map.Entry<String, String>> iterator = cards.entrySet().iterator();
 
-        while (number > 0 && iterator.hasNext()) {
+        while (number > 0 && iterator.hasNext() && scanner.hasNextLine()) {
             Map.Entry<String, String> entry = iterator.next();
             System.out.printf(ASK_QUESTION, entry.getKey());
             String answer = scanner.nextLine();
@@ -190,9 +194,14 @@ public class Main16_menu {
                         .map(Map.Entry::getKey)
                         .collect(Collectors.joining());
                 System.out.printf(ASK_QUESTION_FAIL, entry.getValue(), cardFoundByDefinition);
+            } else {
+                System.out.println();
             }
+            number--;
+
+            int[] numbers = new int[]{4, 3, 1, 10, 9};
+
         }
-
-
+        //System.out.println(COMMAND_LINE);
     }
 }

@@ -1,0 +1,6 @@
+"pink":"purple"
+"blue":"red"
+"white":"black"
+"one":"two"
+"letter":"letters"
+"yellow":"blue"
