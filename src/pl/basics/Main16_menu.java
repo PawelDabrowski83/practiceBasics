@@ -67,6 +67,7 @@ public class Main16_menu {
                         System.out.println(EXIT_MESSAGE);
                         return;
                     default:
+                        System.out.println();
                         System.out.println(COMMAND_LINE);
                 }
             }
@@ -83,6 +84,7 @@ public class Main16_menu {
                 System.out.println(ADD_CARD);
             } else {
                 System.out.printf(CARD_DUPLICATE, card);
+                System.out.println();
                 System.out.println(COMMAND_LINE);
                 return;
             }
@@ -97,6 +99,7 @@ public class Main16_menu {
                 System.out.println(ADD_DEFINITION);
             } else {
                 System.out.printf(DEFINITION_DUPLICATE, definition);
+                System.out.println();
                 System.out.println(COMMAND_LINE);
                 return;
             }
@@ -104,6 +107,7 @@ public class Main16_menu {
         }
         cards.put(card, definition);
         System.out.printf(CARD_ADDED, card, definition);
+        System.out.println();
         System.out.println(COMMAND_LINE);
     }
 
@@ -121,6 +125,7 @@ public class Main16_menu {
             }
             System.out.println(CARD_REMOVED);
         }
+        System.out.println();
         System.out.println(COMMAND_LINE);
     }
 
@@ -146,6 +151,7 @@ public class Main16_menu {
         } catch (IOException e) {
             System.out.println(IMPORT_FAIL);
         }
+        System.out.println();
         System.out.println(COMMAND_LINE);
     }
 
@@ -168,6 +174,7 @@ public class Main16_menu {
             return;
         }
         System.out.printf(EXPORT_SUCCESS, count);
+        System.out.println();
         System.out.println(COMMAND_LINE);
     }
 
@@ -215,6 +222,7 @@ public class Main16_menu {
             number--;
 
         }
+        System.out.println();
         System.out.println(COMMAND_LINE);
     }
 }
