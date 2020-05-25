@@ -28,6 +28,7 @@ public class Main20_SyllablesTest {
         assertEquals(3, Main20_Syllables.countSyllables("nevermore"));
         assertEquals(3, Main20_Syllables.countSyllables("employee"));
         assertEquals(2, Main20_Syllables.countSyllables("sequence"));
+        assertEquals(2, Main20_Syllables.countSyllables("deny"));
 
     }
 
