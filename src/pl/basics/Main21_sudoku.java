@@ -13,7 +13,7 @@ public class Main21_sudoku {
             sudoku = new int[n * n][n * n];
             for (int[] row : sudoku) {
                 int counter = 0;
-                for (int number : row) {
+                for (int ignored : row) {
                     row[counter] = scanner.nextInt();
                     counter++;
                 }
@@ -21,12 +21,13 @@ public class Main21_sudoku {
         }
 
         int[] dictionary = getDictionary(n);
-//        checkRow(sudoku, 0, dictionary);
-
-
-
-
-
+        for (int i = 0; i < n * n; i++) {
+            if (!checkRow(sudoku, i, dictionary) || !checkCol(sudoku, i, dictionary) || !checkSquare(sudoku, i, dictionary)) {
+                System.out.println("NO");
+                return;
+            };
+        }
+        System.out.println("YES");
     }
 
     public static int[] getDictionary(int n) {
@@ -55,5 +56,60 @@ public class Main21_sudoku {
         }
         Arrays.sort(matrixColSorted);
         return Arrays.equals(matrixColSorted, numbers);
+    }
+
+    public static boolean checkSquare(int[][] matrix, int square, int[] numbers) {
+        int [] matrixSquareSorted = new int[matrix[0].length];
+        int rowCounter = 0;
+        int colCounter = 0;
+        switch (square) {
+            case 0:
+                rowCounter = 0;
+                colCounter = 0;
+                break;
+            case 1:
+                rowCounter = 0;
+                colCounter = 3;
+                break;
+            case 2:
+                rowCounter = 0;
+                colCounter = 6;
+                break;
+            case 3:
+                rowCounter = 3;
+                colCounter = 0;
+                break;
+            case 4:
+                rowCounter = 3;
+                colCounter = 3;
+                break;
+            case 5:
+                rowCounter = 3;
+                colCounter = 6;
+                break;
+            case 6:
+                rowCounter = 6;
+                colCounter = 0;
+                break;
+            case 7:
+                rowCounter = 6;
+                colCounter = 3;
+                break;
+            case 8:
+                rowCounter = 6;
+                colCounter = 6;
+                break;
+            default:
+        }
+        int counter = 0;
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                matrixSquareSorted[counter] = matrix[x + rowCounter][y + colCounter];
+                counter++;
+            }
+        }
+        Arrays.sort(matrixSquareSorted);
+        return Arrays.equals(matrixSquareSorted, numbers);
+
     }
 }
