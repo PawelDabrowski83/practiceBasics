@@ -64,20 +64,15 @@ public class Main21_sudoku {
         int colCounter = 0;
         switch (square) {
             case 0:
-                rowCounter = 0;
-                colCounter = 0;
                 break;
             case 1:
-                rowCounter = 0;
                 colCounter = 3;
                 break;
             case 2:
-                rowCounter = 0;
                 colCounter = 6;
                 break;
             case 3:
                 rowCounter = 3;
-                colCounter = 0;
                 break;
             case 4:
                 rowCounter = 3;
@@ -89,7 +84,6 @@ public class Main21_sudoku {
                 break;
             case 6:
                 rowCounter = 6;
-                colCounter = 0;
                 break;
             case 7:
                 rowCounter = 6;
@@ -100,6 +94,7 @@ public class Main21_sudoku {
                 colCounter = 6;
                 break;
             default:
+                return false;
         }
         int counter = 0;
         for (int x = 0; x < 3; x++) {

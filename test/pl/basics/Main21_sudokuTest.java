@@ -124,7 +124,7 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 1;
+        int square = 0;
         boolean expected = true;
 
         // when
@@ -149,7 +149,7 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 2;
+        int square = 1;
         boolean expected = true;
 
         // when
@@ -174,7 +174,7 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 3;
+        int square = 2;
         boolean expected = true;
 
         // when
@@ -199,7 +199,7 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 4;
+        int square = 3;
         boolean expected = true;
 
         // when
@@ -224,7 +224,7 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 5;
+        int square = 4;
         boolean expected = true;
 
         // when
@@ -249,7 +249,7 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 6;
+        int square = 5;
         boolean expected = true;
 
         // when
@@ -274,7 +274,7 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 7;
+        int square = 6;
         boolean expected = true;
 
         // when
@@ -299,7 +299,7 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 8;
+        int square = 7;
         boolean expected = true;
 
         // when
@@ -324,8 +324,58 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 9;
+        int square = 8;
         boolean expected = true;
+
+        // when
+        boolean actual = Main21_sudoku.checkSquare(matrix, square, dictionary);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldCheckSquare9SpoiledWork() {
+        // given
+        int[] dictionary = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int[][] matrix = {
+                {9, 5, 7, 6, 1, 3, 2, 8, 4},
+                {4, 8, 3, 2, 5, 7, 1, 9, 6},
+                {6, 1, 2, 8, 4, 9, 5, 3, 7},
+                {1, 7, 8, 3, 6, 4, 9, 5, 2},
+                {5, 2, 4, 9, 7, 1, 3, 6, 8},
+                {3, 6, 9, 5, 2, 8, 7, 4, 1},
+                {8, 4, 5, 7, 9, 2, 8, 1, 3},
+                {2, 9, 1, 4, 3, 6, 8, 7, 5},
+                {7, 3, 6, 1, 8, 5, 4, 2, 9}
+        };
+        int square = 8;
+        boolean expected = false;
+
+        // when
+        boolean actual = Main21_sudoku.checkSquare(matrix, square, dictionary);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldCheckSquareWithFalseNumberSpoiledWork() {
+        // given
+        int[] dictionary = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int[][] matrix = {
+                {9, 5, 7, 6, 1, 3, 2, 8, 4},
+                {4, 8, 3, 2, 5, 7, 1, 9, 6},
+                {6, 1, 2, 8, 4, 9, 5, 3, 7},
+                {1, 7, 8, 3, 6, 4, 9, 5, 2},
+                {5, 2, 4, 9, 7, 1, 3, 6, 8},
+                {3, 6, 9, 5, 2, 8, 7, 4, 1},
+                {8, 4, 5, 7, 9, 2, 8, 1, 3},
+                {2, 9, 1, 4, 3, 6, 8, 7, 5},
+                {7, 3, 6, 1, 8, 5, 4, 2, 9}
+        };
+        int square = 11;
+        boolean expected = false;
 
         // when
         boolean actual = Main21_sudoku.checkSquare(matrix, square, dictionary);
