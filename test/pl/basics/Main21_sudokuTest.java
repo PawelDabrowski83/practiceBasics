@@ -112,7 +112,6 @@ public class Main21_sudokuTest {
     @Test
     public void shouldCheckSquare1Work() {
         // given
-        int[] dictionary = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[][] matrix = {
                 {9, 5, 7, 6, 1, 3, 2, 8, 4},
                 {4, 8, 3, 2, 5, 7, 1, 9, 6},
@@ -124,11 +123,12 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 0;
+        int[] square = {0, 0};
+        int n = 3;
         boolean expected = true;
 
         // when
-        boolean actual = Main21_sudoku.checkSquare(matrix, square, dictionary);
+        boolean actual = Main21_sudoku.checkSquare(matrix, square, n);
 
         // then
         assertEquals(expected, actual);
@@ -137,7 +137,6 @@ public class Main21_sudokuTest {
     @Test
     public void shouldCheckSquare2Work() {
         // given
-        int[] dictionary = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[][] matrix = {
                 {9, 5, 7, 6, 1, 3, 2, 8, 4},
                 {4, 8, 3, 2, 5, 7, 1, 9, 6},
@@ -149,11 +148,12 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 1;
+        int[] square = {0, 1};
+        int n = 3;
         boolean expected = true;
 
         // when
-        boolean actual = Main21_sudoku.checkSquare(matrix, square, dictionary);
+        boolean actual = Main21_sudoku.checkSquare(matrix, square, n);
 
         // then
         assertEquals(expected, actual);
@@ -162,7 +162,6 @@ public class Main21_sudokuTest {
     @Test
     public void shouldCheckSquare3Work() {
         // given
-        int[] dictionary = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[][] matrix = {
                 {9, 5, 7, 6, 1, 3, 2, 8, 4},
                 {4, 8, 3, 2, 5, 7, 1, 9, 6},
@@ -174,11 +173,12 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 2;
+        int[] square = {0, 2};
+        int n = 3;
         boolean expected = true;
 
         // when
-        boolean actual = Main21_sudoku.checkSquare(matrix, square, dictionary);
+        boolean actual = Main21_sudoku.checkSquare(matrix, square, n);
 
         // then
         assertEquals(expected, actual);
@@ -187,7 +187,6 @@ public class Main21_sudokuTest {
     @Test
     public void shouldCheckSquare4Work() {
         // given
-        int[] dictionary = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[][] matrix = {
                 {9, 5, 7, 6, 1, 3, 2, 8, 4},
                 {4, 8, 3, 2, 5, 7, 1, 9, 6},
@@ -199,11 +198,12 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 3;
+        int[] square = {1, 0};
+        int n = 3;
         boolean expected = true;
 
         // when
-        boolean actual = Main21_sudoku.checkSquare(matrix, square, dictionary);
+        boolean actual = Main21_sudoku.checkSquare(matrix, square, n);
 
         // then
         assertEquals(expected, actual);
@@ -212,7 +212,6 @@ public class Main21_sudokuTest {
     @Test
     public void shouldCheckSquare5Work() {
         // given
-        int[] dictionary = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[][] matrix = {
                 {9, 5, 7, 6, 1, 3, 2, 8, 4},
                 {4, 8, 3, 2, 5, 7, 1, 9, 6},
@@ -224,11 +223,12 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 4;
+        int[] square = {1, 1};
+        int n = 3;
         boolean expected = true;
 
         // when
-        boolean actual = Main21_sudoku.checkSquare(matrix, square, dictionary);
+        boolean actual = Main21_sudoku.checkSquare(matrix, square, n);
 
         // then
         assertEquals(expected, actual);
@@ -237,7 +237,6 @@ public class Main21_sudokuTest {
     @Test
     public void shouldCheckSquare6Work() {
         // given
-        int[] dictionary = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[][] matrix = {
                 {9, 5, 7, 6, 1, 3, 2, 8, 4},
                 {4, 8, 3, 2, 5, 7, 1, 9, 6},
@@ -249,11 +248,12 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 5;
+        int[] square = {1, 2};
+        int n = 3;
         boolean expected = true;
 
         // when
-        boolean actual = Main21_sudoku.checkSquare(matrix, square, dictionary);
+        boolean actual = Main21_sudoku.checkSquare(matrix, square, n);
 
         // then
         assertEquals(expected, actual);
@@ -262,7 +262,6 @@ public class Main21_sudokuTest {
     @Test
     public void shouldCheckSquare7Work() {
         // given
-        int[] dictionary = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[][] matrix = {
                 {9, 5, 7, 6, 1, 3, 2, 8, 4},
                 {4, 8, 3, 2, 5, 7, 1, 9, 6},
@@ -274,11 +273,12 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 6;
+        int[] square = {2, 0};
+        int n = 3;
         boolean expected = true;
 
         // when
-        boolean actual = Main21_sudoku.checkSquare(matrix, square, dictionary);
+        boolean actual = Main21_sudoku.checkSquare(matrix, square, n);
 
         // then
         assertEquals(expected, actual);
@@ -287,7 +287,6 @@ public class Main21_sudokuTest {
     @Test
     public void shouldCheckSquare8Work() {
         // given
-        int[] dictionary = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[][] matrix = {
                 {9, 5, 7, 6, 1, 3, 2, 8, 4},
                 {4, 8, 3, 2, 5, 7, 1, 9, 6},
@@ -299,11 +298,12 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 7;
+        int[] square = {2, 1};
+        int n = 3;
         boolean expected = true;
 
         // when
-        boolean actual = Main21_sudoku.checkSquare(matrix, square, dictionary);
+        boolean actual = Main21_sudoku.checkSquare(matrix, square, n);
 
         // then
         assertEquals(expected, actual);
@@ -312,7 +312,6 @@ public class Main21_sudokuTest {
     @Test
     public void shouldCheckSquare9Work() {
         // given
-        int[] dictionary = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[][] matrix = {
                 {9, 5, 7, 6, 1, 3, 2, 8, 4},
                 {4, 8, 3, 2, 5, 7, 1, 9, 6},
@@ -324,11 +323,12 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 8;
+        int[] square = {2, 2};
+        int n = 3;
         boolean expected = true;
 
         // when
-        boolean actual = Main21_sudoku.checkSquare(matrix, square, dictionary);
+        boolean actual = Main21_sudoku.checkSquare(matrix, square, n);
 
         // then
         assertEquals(expected, actual);
@@ -337,7 +337,6 @@ public class Main21_sudokuTest {
     @Test
     public void shouldCheckSquare9SpoiledWork() {
         // given
-        int[] dictionary = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[][] matrix = {
                 {9, 5, 7, 6, 1, 3, 2, 8, 4},
                 {4, 8, 3, 2, 5, 7, 1, 9, 6},
@@ -349,11 +348,12 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 8;
+        int[] square = {2, 2};
+        int n = 3;
         boolean expected = false;
 
         // when
-        boolean actual = Main21_sudoku.checkSquare(matrix, square, dictionary);
+        boolean actual = Main21_sudoku.checkSquare(matrix, square, n);
 
         // then
         assertEquals(expected, actual);
@@ -362,7 +362,6 @@ public class Main21_sudokuTest {
     @Test
     public void shouldCheckSquareWithFalseNumberSpoiledWork() {
         // given
-        int[] dictionary = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[][] matrix = {
                 {9, 5, 7, 6, 1, 3, 2, 8, 4},
                 {4, 8, 3, 2, 5, 7, 1, 9, 6},
@@ -374,11 +373,32 @@ public class Main21_sudokuTest {
                 {2, 9, 1, 4, 3, 6, 8, 7, 5},
                 {7, 3, 6, 1, 8, 5, 4, 2, 9}
         };
-        int square = 11;
+        int[] square = {3, 3};
+        int n = 3;
         boolean expected = false;
 
         // when
-        boolean actual = Main21_sudoku.checkSquare(matrix, square, dictionary);
+        boolean actual = Main21_sudoku.checkSquare(matrix, square, n);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldCheckSquareWithN2Work() {
+        // given
+        int[][] matrix = {
+                {1, 2, 3, 4},
+                {3, 4, 1, 2},
+                {4, 1, 2, 3},
+                {2, 3, 4, 1}
+        };
+        int[] square = {0, 0};
+        int n = 2;
+        boolean expected = true;
+
+        // when
+        boolean actual = Main21_sudoku.checkSquare(matrix, square, n);
 
         // then
         assertEquals(expected, actual);

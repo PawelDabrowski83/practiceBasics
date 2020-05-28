@@ -21,11 +21,19 @@ public class Main21_sudoku {
         }
 
         int[] dictionary = getDictionary(n);
+        int[] square = new int[n];
         for (int i = 0; i < n * n; i++) {
-            if (!checkRow(sudoku, i, dictionary) || !checkCol(sudoku, i, dictionary) || !checkSquare(sudoku, i, dictionary)) {
+            if (!checkRow(sudoku, i, dictionary) || !checkCol(sudoku, i, dictionary)) {
                 System.out.println("NO");
                 return;
             };
+        }
+        for (int y = 0; y < n; y++) {
+            for (int x = 0; x < n; x++) {
+                if (!checkSquare(sudoku, new int[]{y, x}, n)) {
+                    System.out.println("NO");
+                }
+            }
         }
         System.out.println("YES");
     }
@@ -58,47 +66,18 @@ public class Main21_sudoku {
         return Arrays.equals(matrixColSorted, numbers);
     }
 
-    public static boolean checkSquare(int[][] matrix, int square, int[] numbers) {
-        int [] matrixSquareSorted = new int[matrix[0].length];
-        int rowCounter = 0;
-        int colCounter = 0;
-        switch (square) {
-            case 0:
-                break;
-            case 1:
-                colCounter = 3;
-                break;
-            case 2:
-                colCounter = 6;
-                break;
-            case 3:
-                rowCounter = 3;
-                break;
-            case 4:
-                rowCounter = 3;
-                colCounter = 3;
-                break;
-            case 5:
-                rowCounter = 3;
-                colCounter = 6;
-                break;
-            case 6:
-                rowCounter = 6;
-                break;
-            case 7:
-                rowCounter = 6;
-                colCounter = 3;
-                break;
-            case 8:
-                rowCounter = 6;
-                colCounter = 6;
-                break;
-            default:
-                return false;
+    public static boolean checkSquare(int[][] matrix, int[] square, int n) {
+        if (square[0] > n - 1 || square[1] > n - 1) {
+            return false;
         }
+        int[] numbers = getDictionary(n);
+        int[] matrixSquareSorted = new int[matrix[0].length];
+        int rowCounter = n * square[0];
+        int colCounter = n * square[1];
+
         int counter = 0;
-        for (int x = 0; x < 3; x++) {
-            for (int y = 0; y < 3; y++) {
+        for (int x = 0; x < n; x++) {
+            for (int y = 0; y < n; y++) {
                 matrixSquareSorted[counter] = matrix[x + rowCounter][y + colCounter];
                 counter++;
             }
