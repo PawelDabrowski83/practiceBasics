@@ -32,6 +32,7 @@ public class Main21_sudoku {
             for (int x = 0; x < n; x++) {
                 if (!checkSquare(sudoku, new int[]{y, x}, n)) {
                     System.out.println("NO");
+                    return;
                 }
             }
         }
