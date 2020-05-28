@@ -403,4 +403,21 @@ public class Main21_sudokuTest {
         // then
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void shouldCheckSquareWithN1Work() {
+        // given
+        int[][] matrix = {
+                {1}
+        };
+        int[] square = {0, 0};
+        int n = 1;
+        boolean expected = true;
+
+        // when
+        boolean actual = Main21_sudoku.checkSquare(matrix, square, n);
+
+        // then
+        assertEquals(expected, actual);
+    }
 }
