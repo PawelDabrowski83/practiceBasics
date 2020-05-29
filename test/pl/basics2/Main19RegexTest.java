@@ -1,6 +1,7 @@
-package pl.basics;
+package pl.basics2;
 
 import org.junit.Test;
+import pl.basics2.Main19Regex;
 
 import static org.junit.Assert.assertEquals;
 
