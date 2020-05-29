@@ -40,6 +40,10 @@ public class Main22_matrixSolver {
 
             Fraction fraction = (Fraction) o;
 
+            if (getNumerator() == 0 && fraction.getNumerator() == 0) {
+                return true;
+            }
+
             if (getNumerator() != fraction.getNumerator()) return false;
             return getDenominator() == fraction.getDenominator();
         }
