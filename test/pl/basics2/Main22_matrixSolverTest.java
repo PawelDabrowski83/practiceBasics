@@ -157,4 +157,42 @@ public class Main22_matrixSolverTest {
                 new Fraction(1, 1), new Fraction(0, 1), new Fraction(15, -28)});
         assertEquals(rowExpected, row.reduceRowToOne());
     }
+
+    @Test
+    public void shouldAddFractionWork() {
+        Fraction fraction1 = new Fraction(1, 2);
+        Fraction fraction2 = new Fraction(1, 4);
+        assertEquals(new Fraction(3, 4), fraction1.addFraction(fraction2));
+        assertEquals(new Fraction(1, 1), fraction1.addFraction(fraction1));
+        assertEquals(new Fraction(1, 2), fraction2.addFraction(fraction2));
+        assertEquals(new Fraction(3,4), fraction2.addFraction(fraction1));
+
+        fraction1 = new Fraction(0, 8);
+        fraction2 = new Fraction(1, 4);
+        assertEquals(new Fraction(1, 4), fraction1.addFraction(fraction2));
+
+        fraction1 = new Fraction(-1, 8);
+        fraction2 = new Fraction(1, 4);
+        assertEquals(new Fraction(1, 8), fraction1.addFraction(fraction2));
+
+        fraction1 = new Fraction(-1, 7);
+        fraction2 = new Fraction(2, 3);
+        assertEquals(new Fraction(11, 21), fraction1.addFraction(fraction2));
+
+        fraction1 = new Fraction(0, 8);
+        fraction2 = new Fraction(0, 1);
+        assertEquals(new Fraction(0, 1), fraction1.addFraction(fraction2));
+
+    }
+
+    @Test
+    public void shouldFindCommonDenominatorWork() {
+        assertEquals(4, Main22_matrixSolver.Utils.findCommonDenominator(new Fraction(1, 2), new Fraction(1, 4)));
+        assertEquals(1, Main22_matrixSolver.Utils.findCommonDenominator(new Fraction(1, 1), new Fraction(9, 1)));
+        assertEquals(5, Main22_matrixSolver.Utils.findCommonDenominator(new Fraction(1, -5), new Fraction(3, 5)));
+        assertEquals(6, Main22_matrixSolver.Utils.findCommonDenominator(new Fraction(1, 2), new Fraction(1, 3)));
+        assertEquals(6, Main22_matrixSolver.Utils.findCommonDenominator(new Fraction(1, 2), new Fraction(1, -3)));
+        assertEquals(6, Main22_matrixSolver.Utils.findCommonDenominator(new Fraction(0, 2), new Fraction(1, 3)));
+        assertEquals(1, Main22_matrixSolver.Utils.findCommonDenominator(new Fraction(1, 0), new Fraction(1, 0)));
+    }
 }

@@ -41,6 +41,26 @@ public class Main22_matrixSolver {
             return new Fraction(denominator, numerator);
         }
 
+        public Fraction addFraction(Fraction addedFraction) {
+            Fraction resultFraction = new Fraction(this.numerator, this.denominator);
+            if (denominator > addedFraction.denominator && denominator % addedFraction.denominator == 0) {
+                int difference = denominator / addedFraction.denominator;
+                addedFraction = new Fraction(addedFraction.numerator * difference, denominator);
+            } else if (addedFraction.denominator > denominator && addedFraction.denominator % denominator == 0) {
+                int difference = addedFraction.denominator / denominator;
+                resultFraction = new Fraction(numerator * difference, denominator * difference);
+            } else if (resultFraction.denominator != addedFraction.denominator) {
+                resultFraction = new Fraction(this.numerator * addedFraction.denominator,
+                                                this.denominator * addedFraction.denominator);
+                addedFraction = new Fraction(addedFraction.numerator * this.denominator,
+                                                addedFraction.denominator * this.denominator);
+            }
+
+            resultFraction = new Fraction(numerator + addedFraction.numerator, denominator);
+
+            return resultFraction;
+        }
+
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -117,6 +137,18 @@ public class Main22_matrixSolver {
             return this;
         }
 
+        public Row addRow(Row addedRow) {
+            if (this.numbers.length != addedRow.numbers.length) {
+                throw new IllegalArgumentException("Rows have different length: " +
+                        this.toString() + " : " + addedRow.toString());
+            }
+            int counter = 0;
+            for (Fraction fraction : addedRow.numbers) {
+
+            }
+            return this;
+        }
+
         public Fraction findLeadingEntry() {
             for (Fraction fraction : numbers) {
                 if (!new Fraction(0, 1).equals(fraction)) {
@@ -152,6 +184,31 @@ public class Main22_matrixSolver {
                 }
             }
             return first;
+        }
+
+        public static Fraction addTwoFractions(Fraction fraction1, Fraction fraction2) {
+            return new Fraction(0, 1);
+        }
+
+        public static int findCommonDenominator(Fraction fraction1, Fraction fraction2) {
+            int denom1 = Math.abs(fraction1.denominator);
+            int denom2 = Math.abs(fraction2.denominator);
+
+            if (denom1 == 0 && denom2 == 0) {
+                return 1;
+            }
+
+            if (denom1 > denom2 && denom1 % denom2 == 0) {
+                return denom1;
+            }
+            if (denom2 > denom1 && denom2 % denom1 == 0) {
+                return denom2;
+            }
+            if (denom1 == denom2) {
+                return denom1;
+            } else {
+                return denom1 * denom2;
+            }
         }
 
 
