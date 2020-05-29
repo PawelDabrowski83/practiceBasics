@@ -6,7 +6,7 @@ public class Main22_matrixSolver {
 
     }
 
-    class Fraction {
+    static class Fraction {
         final int numerator;
         final int denominator;
 
@@ -23,15 +23,31 @@ public class Main22_matrixSolver {
             return denominator;
         }
 
-        public Fraction reduce(Fraction fraction) {
-            int greatestCommonDivisor = Utils.findGreatestCommonDivisor(fraction.numerator, fraction.denominator);
+        public Fraction reduce() {
+            int greatestCommonDivisor = Utils.findGreatestCommonDivisor(numerator, denominator);
             if (greatestCommonDivisor > 1) {
                 return new Fraction(numerator / greatestCommonDivisor, denominator / greatestCommonDivisor);
             }
-            return fraction;
+            return this;
         }
 
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Fraction)) return false;
 
+            Fraction fraction = (Fraction) o;
+
+            if (getNumerator() != fraction.getNumerator()) return false;
+            return getDenominator() == fraction.getDenominator();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = getNumerator();
+            result = 31 * result + getDenominator();
+            return result;
+        }
     }
 
     static class Row {
@@ -40,6 +56,9 @@ public class Main22_matrixSolver {
 
     static class Utils {
         public static int findGreatestCommonDivisor(int first, int second) {
+
+            first = Math.abs(first);
+            second = Math.abs(second);
 
             while (first != second) {
                 if (second > first) {
@@ -50,6 +69,8 @@ public class Main22_matrixSolver {
             }
             return first;
         }
+
+
 
     }
 
