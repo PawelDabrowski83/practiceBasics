@@ -1,5 +1,7 @@
 package pl.basics2;
 
+import java.util.Arrays;
+
 public class Main22_matrixSolver {
 
     public static void main(String[] args) {
@@ -48,15 +50,60 @@ public class Main22_matrixSolver {
             result = 31 * result + getDenominator();
             return result;
         }
+
+        @Override
+        public String toString() {
+            return "Fraction{" + numerator + " /" + denominator + "}";
+        }
     }
 
     static class Row {
+        Fraction[] numbers;
 
+        public Row(Fraction[] numbers) {
+            this.numbers = numbers;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Row)) return false;
+
+            Row row = (Row) o;
+
+            // Probably incorrect - comparing Object[] arrays with Arrays.equals
+            return Arrays.equals(numbers, row.numbers);
+        }
+
+        @Override
+        public int hashCode() {
+            return Arrays.hashCode(numbers);
+        }
+
+        @Override
+        public String toString() {
+            return "Row{" +
+                    "numbers=" + Arrays.toString(numbers) +
+                    '}';
+        }
+
+        public Row multiply(Fraction factor) {
+            int counter = 0;
+            for (Fraction fraction : numbers) {
+                numbers[counter] = new Fraction(fraction.numerator * factor.numerator,
+                                                fraction.denominator * factor.denominator).reduce();
+                counter++;
+            }
+            return this;
+        }
     }
 
     static class Utils {
         public static int findGreatestCommonDivisor(int first, int second) {
 
+            if (first == 0 || second == 0) {
+                return 1;
+            }
             first = Math.abs(first);
             second = Math.abs(second);
 
