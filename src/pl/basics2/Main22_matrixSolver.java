@@ -27,11 +27,18 @@ public class Main22_matrixSolver {
         }
 
         public Fraction reduce() {
+            if (numerator == 0 || denominator == 0) {
+                return new Fraction(0, 1);
+            }
             int greatestCommonDivisor = Utils.findGreatestCommonDivisor(numerator, denominator);
             if (greatestCommonDivisor > 1) {
                 return new Fraction(numerator / greatestCommonDivisor, denominator / greatestCommonDivisor);
             }
             return this;
+        }
+
+        public Fraction findOpposite() {
+            return new Fraction(denominator, numerator);
         }
 
         @Override
@@ -64,6 +71,10 @@ public class Main22_matrixSolver {
 
     static class Matrix {
         List<Row> rows;
+
+        public Matrix(List<Row> rows) {
+            this.rows = rows;
+        }
     }
 
     static class Row {
@@ -102,6 +113,23 @@ public class Main22_matrixSolver {
                 numbers[counter] = new Fraction(fraction.numerator * factor.numerator,
                                                 fraction.denominator * factor.denominator).reduce();
                 counter++;
+            }
+            return this;
+        }
+
+        public Fraction findLeadingEntry() {
+            for (Fraction fraction : numbers) {
+                if (!new Fraction(0, 1).equals(fraction)) {
+                    return fraction;
+                }
+            }
+            return new Fraction(0, 1);
+        }
+
+        public Row reduceRowToOne() {
+            Fraction leadingEntry = this.findLeadingEntry();
+            if (!new Fraction(0, 1).equals(leadingEntry)) {
+                this.multiply(leadingEntry.findOpposite());
             }
             return this;
         }

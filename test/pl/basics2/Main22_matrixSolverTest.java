@@ -69,6 +69,20 @@ public class Main22_matrixSolverTest {
                 new Fraction(-6, 1), new Fraction(-84, 1), new Fraction(12, 1), new Fraction(0, 7)});
         assertEquals(rowExpected, row.multiply(multiplier));
 
+        row = new Row(new Fraction[]{
+                new Fraction(0, 2), new Fraction(7, 15), new Fraction(-8, 3), new Fraction(4, 7)});
+        multiplier = new Fraction(15, 7);
+        rowExpected = new Row(new Fraction[]{
+                new Fraction(0, 14), new Fraction(1, 1), new Fraction(-40, 7), new Fraction(60, 49)});
+        assertEquals(rowExpected, row.multiply(multiplier));
+
+        row = new Row(new Fraction[]{
+                new Fraction(0, 2), new Fraction(7, 15), new Fraction(-8, 3), new Fraction(4, 7)});
+        multiplier = new Fraction(15, 7);
+        rowExpected = new Row(new Fraction[]{
+                new Fraction(0, 14), new Fraction(1, 1), new Fraction(-40, 7), new Fraction(60, 49)});
+        assertEquals(rowExpected, row.multiply(multiplier));
+
     }
 
     @Test
@@ -76,5 +90,71 @@ public class Main22_matrixSolverTest {
         Fraction fraction1 = new Fraction(0, 9);
         Fraction fraction2 = new Fraction(0, 1);
         assertEquals(fraction1, fraction2);
+    }
+
+    @Test
+    public void shouldFindLeadingEntryWork() {
+        Row row = new Row(new Fraction[]{
+                new Fraction(1, 2), new Fraction(7, 1), new Fraction(-1, 1), new Fraction(0, 1)});
+        assertEquals(new Fraction(1, 2), row.findLeadingEntry());
+
+        row = new Row(new Fraction[]{
+                new Fraction(0, 2), new Fraction(7, 1), new Fraction(-1, 1), new Fraction(0, 1)});
+        assertEquals(new Fraction(7, 1), row.findLeadingEntry());
+
+        row = new Row(new Fraction[]{
+                new Fraction(0, 2), new Fraction(1, 1), new Fraction(-1, 7), new Fraction(0, 1)});
+        assertEquals(new Fraction(1, 1), row.findLeadingEntry());
+
+        row = new Row(new Fraction[]{
+                new Fraction(0, 2), new Fraction(0, 1), new Fraction(-1, 7), new Fraction(0, 1)});
+        assertEquals(new Fraction(-1, 7), row.findLeadingEntry());
+
+        row = new Row(new Fraction[]{
+                new Fraction(0, 2), new Fraction(0, 1), new Fraction(0, 7), new Fraction(0, 1)});
+        assertEquals(new Fraction(0, 1), row.findLeadingEntry());
+
+    }
+
+    @Test
+    public void shouldFindOppositeWork() {
+        Fraction fraction = new Fraction(1, 2);
+        assertEquals(new Fraction(2, 1), fraction.findOpposite());
+
+        fraction = new Fraction(0, 1);
+        assertEquals(new Fraction(1, 0), fraction.findOpposite());
+
+        fraction = new Fraction(-3, 15);
+        assertEquals(new Fraction(15, -3), fraction.findOpposite());
+
+        fraction = new Fraction(-8, 3);
+        assertEquals(new Fraction(3, -8), fraction.findOpposite());
+    }
+
+    @Test
+    public void shouldReduceRowToOneWork() {
+        Row row = new Row(new Fraction[]{
+                new Fraction(1, 2), new Fraction(7, 1), new Fraction(-1, 1), new Fraction(0, 1)});
+        Row rowExpected = new Row(new Fraction[]{
+                new Fraction(1, 1), new Fraction(14, 1), new Fraction(-2, 1), new Fraction(0, 1)});
+        assertEquals(rowExpected, row.reduceRowToOne());
+
+        row = new Row(new Fraction[]{
+                new Fraction(0, 2), new Fraction(3, 1), new Fraction(-1, 1), new Fraction(5, 1)});
+        rowExpected = new Row(new Fraction[]{
+                new Fraction(0, 6), new Fraction(1, 1), new Fraction(-1, 3), new Fraction(5, 3)});
+        assertEquals(rowExpected, row.reduceRowToOne());
+
+        row = new Row(new Fraction[]{
+                new Fraction(7, 15), new Fraction(0, 7)});
+        rowExpected = new Row(new Fraction[]{
+                new Fraction(1, 1), new Fraction(0, 1)});
+        assertEquals(rowExpected, row.reduceRowToOne());
+
+        row = new Row(new Fraction[]{
+                new Fraction(7, 15), new Fraction(0, 7), new Fraction(3, -12)});
+        rowExpected = new Row(new Fraction[]{
+                new Fraction(1, 1), new Fraction(0, 1), new Fraction(15, -28)});
+        assertEquals(rowExpected, row.reduceRowToOne());
     }
 }
