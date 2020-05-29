@@ -70,4 +70,11 @@ public class Main22_matrixSolverTest {
         assertEquals(rowExpected, row.multiply(multiplier));
 
     }
+
+    @Test
+    public void shouldZeroFractionsEqualThemselves() {
+        Fraction fraction1 = new Fraction(0, 9);
+        Fraction fraction2 = new Fraction(0, 1);
+        assertEquals(fraction1, fraction2);
+    }
 }

@@ -1,6 +1,7 @@
 package pl.basics2;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Main22_matrixSolver {
 
@@ -59,6 +60,10 @@ public class Main22_matrixSolver {
         public String toString() {
             return "Fraction{" + numerator + " /" + denominator + "}";
         }
+    }
+
+    static class Matrix {
+        List<Row> rows;
     }
 
     static class Row {
