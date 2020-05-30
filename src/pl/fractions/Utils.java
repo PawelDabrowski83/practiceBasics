@@ -29,7 +29,7 @@ public class Utils {
             int difference = commonDenominator / fraction2.denominator;
             fraction2 = new Fraction(fraction2.numerator * difference, fraction2.denominator * difference);
         }
-        return new Fraction(fraction1.numerator + fraction2.numerator, fraction1.denominator);
+        return new Fraction(fraction1.numerator + fraction2.numerator, fraction1.denominator).shape();
     }
 
     public static int findCommonDenominator(Fraction fraction1, Fraction fraction2) {

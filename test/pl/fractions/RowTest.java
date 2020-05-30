@@ -97,7 +97,7 @@ public class RowTest {
         row = new Row(new Fraction[]{
                 new Fraction(7, 15), new Fraction(0, 7), new Fraction(3, -12)});
         rowExpected = new Row(new Fraction[]{
-                new Fraction(1, 1), new Fraction(0, 1), new Fraction(15, -28)});
+                new Fraction(1, 1), new Fraction(0, 1), new Fraction(-15, 28)});
         assertEquals(rowExpected, row.reduceRowToOne());
     }
 }
