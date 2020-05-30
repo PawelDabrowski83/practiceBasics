@@ -49,8 +49,9 @@ public class Row {
                     this.toString() + " : " + addedRow.toString());
         }
         int counter = 0;
-        for (Fraction fraction : addedRow.numbers) {
-
+        for (Fraction ignored : addedRow.numbers) {
+            numbers[counter] = Utils.addTwoFractions(numbers[counter], addedRow.numbers[counter]);
+            counter++;
         }
         return this;
     }

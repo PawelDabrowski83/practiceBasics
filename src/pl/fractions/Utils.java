@@ -53,6 +53,16 @@ public class Utils {
         }
     }
 
+    public static Matrix reduceAllRowsToOne(Matrix matrix) {
+        int equations = matrix.rows.size();
+        // reduce to one all rows
+        int counter = 0;
+        for (Row row : matrix.rows) {
+            matrix.rows.set(counter, matrix.rows.get(counter).reduceRowToOne());
+        }
+        return matrix;
+    }
+
 
 
 }

@@ -9,4 +9,7 @@ public class Matrix {
     public Matrix(List<Row> rows) {
         this.rows = rows;
     }
+
+    public Matrix() {
+    }
 }

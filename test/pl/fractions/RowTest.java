@@ -100,4 +100,23 @@ public class RowTest {
                 new Fraction(1, 1), new Fraction(0, 1), new Fraction(-15, 28)});
         assertEquals(rowExpected, row.reduceRowToOne());
     }
+
+    @Test
+    public void shouldAddRowWork() {
+        Row row = new Row(new Fraction[]{
+                new Fraction(0, 2), new Fraction(3, 1), new Fraction(-1, 1), new Fraction(5, 1)});
+        Row addingRow = new Row(new Fraction[]{
+                new Fraction(1, 2), new Fraction(-1, 3), new Fraction(6, 2), new Fraction(0, 1)});
+        Row expected = new Row(new Fraction[]{
+                new Fraction(1, 2), new Fraction(8, 3), new Fraction(2, 1), new Fraction(5, 1)});
+        assertEquals(expected, row.addRow(addingRow));
+
+        row = new Row(new Fraction[]{
+                new Fraction(1, 11), new Fraction(-2, 7), new Fraction(-3, 3), new Fraction(1, 1)});
+        addingRow = new Row(new Fraction[]{
+                new Fraction(-1, 2), new Fraction(-1, 3), new Fraction(6, 8), new Fraction(3, 2)});
+        expected = new Row(new Fraction[]{
+                new Fraction(-9, 22), new Fraction(-13, 21), new Fraction(-1, 4), new Fraction(5, 2)});
+        assertEquals(expected, row.addRow(addingRow));
+    }
 }
