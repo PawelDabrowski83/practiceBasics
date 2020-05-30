@@ -55,8 +55,8 @@ public class Utils {
 
     public static Matrix reduceAllRowsToLeadingOne(Matrix matrix) {
         int counter = 0;
-        for (Row row : matrix.rows) {
-            matrix.rows.set(counter, matrix.rows.get(counter).reduceRowToOne());
+        for (Integer integer : matrix.rows.keySet()) {
+            matrix.rows.put(counter, matrix.rows.get(counter).reduceRowToOne());
             counter++;
         }
         return matrix;
