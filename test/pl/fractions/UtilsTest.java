@@ -2,6 +2,8 @@ package pl.fractions;
 
 import org.junit.Test;
 
+import java.util.LinkedList;
+
 import static org.junit.Assert.assertEquals;
 import static pl.fractions.Utils.addTwoFractions;
 import static pl.fractions.Utils.findCommonDenominator;
@@ -62,33 +64,74 @@ public class UtilsTest {
     }
 
     @Test
-    public void shouldReduceRowToOneWork() {
+    public void shouldReduceRowToLeadingOneWork() {
+        // given
         Matrix matrix = new Matrix();
+        matrix.rows = new LinkedList<>();
         Row row1 = new Row(new Fraction[]{
                 new Fraction(1, 2), new Fraction(7, 1), new Fraction(-1, 1), new Fraction(0, 1)});
         Row row2 = new Row(new Fraction[]{
                 new Fraction(0, 2), new Fraction(3, 1), new Fraction(-1, 1), new Fraction(5, 1)});
         Row row3 = new Row(new Fraction[]{
-                new Fraction(7, 15), new Fraction(0, 7)});
+                new Fraction(7, 15), new Fraction(0, 7), new Fraction(1, 1), new Fraction(1, 1)});
         Row row4 = new Row(new Fraction[]{
-                new Fraction(7, 15), new Fraction(0, 7), new Fraction(3, -12)});
+                new Fraction(7, 15), new Fraction(0, 7), new Fraction(3, -12), new Fraction(1, 2)});
         matrix.rows.add(row1);
         matrix.rows.add(row2);
         matrix.rows.add(row3);
         matrix.rows.add(row4);
         Matrix matrixExpected = new Matrix();
+        matrixExpected.rows = new LinkedList<>();
         row1 = new Row(new Fraction[]{
-                new Fraction(1, 2), new Fraction(7, 1), new Fraction(-1, 1), new Fraction(0, 1)});
+                new Fraction(1, 1), new Fraction(14, 1), new Fraction(-2, 1), new Fraction(0, 1)});
         row2 = new Row(new Fraction[]{
-                new Fraction(0, 2), new Fraction(3, 1), new Fraction(-1, 1), new Fraction(5, 1)});
+                new Fraction(0, 2), new Fraction(1, 1), new Fraction(-1, 3), new Fraction(5, 3)});
         row3 = new Row(new Fraction[]{
-                new Fraction(7, 15), new Fraction(0, 7)});
+                new Fraction(1, 1), new Fraction(0, 1), new Fraction(15, 7), new Fraction(15, 7)});
         row4 = new Row(new Fraction[]{
-                new Fraction(7, 15), new Fraction(0, 7), new Fraction(3, -12)});
+                new Fraction(1, 1), new Fraction(0, 1), new Fraction(-15, 28), new Fraction(15, 14)});
         matrixExpected.rows.add(row1);
         matrixExpected.rows.add(row2);
         matrixExpected.rows.add(row3);
         matrixExpected.rows.add(row4);
 
+        // when
+        Matrix matrixActual = Utils.reduceAllRowsToLeadingOne(matrix);
+
+        // then
+        assertEquals(matrixExpected, matrixActual);
+    }
+
+    @Test
+    public void shouldReduceRowToLeadingOneWork2() {
+        // given
+        Matrix matrix = new Matrix();
+        matrix.rows = new LinkedList<>();
+        Row row1 = new Row(new Fraction[]{
+                new Fraction(1, 1), new Fraction(7, 1), new Fraction(9, 1), new Fraction(3, 1)});
+        Row row2 = new Row(new Fraction[]{
+                new Fraction(4, 1), new Fraction(2, 1), new Fraction(5, 1), new Fraction(2, 1)});
+        Row row3 = new Row(new Fraction[]{
+                new Fraction(6, 1), new Fraction(1, 1), new Fraction(3, 1), new Fraction(8, 1)});
+        matrix.rows.add(row1);
+        matrix.rows.add(row2);
+        matrix.rows.add(row3);
+        Matrix matrixExpected = new Matrix();
+        matrixExpected.rows = new LinkedList<>();
+        row1 = new Row(new Fraction[]{
+                new Fraction(1, 1), new Fraction(7, 1), new Fraction(9, 1), new Fraction(3, 1)});
+        row2 = new Row(new Fraction[]{
+                new Fraction(1, 1), new Fraction(1, 2), new Fraction(5, 4), new Fraction(1, 2)});
+        row3 = new Row(new Fraction[]{
+                new Fraction(1, 1), new Fraction(1, 6), new Fraction(1, 2), new Fraction(4, 3)});
+        matrixExpected.rows.add(row1);
+        matrixExpected.rows.add(row2);
+        matrixExpected.rows.add(row3);
+
+        // when
+        Matrix matrixActual = Utils.reduceAllRowsToLeadingOne(matrix);
+
+        // then
+        assertEquals(matrixExpected, matrixActual);
     }
 }

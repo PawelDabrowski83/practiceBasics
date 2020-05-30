@@ -65,6 +65,17 @@ public class Row {
         return new Fraction(0, 1);
     }
 
+    public int findLeadingEntryColumn() {
+        int counter = 0;
+        for (Fraction fraction : numbers) {
+            if (!new Fraction(0, 1).equals(fraction)) {
+                return counter;
+            }
+            counter++;
+        }
+        return counter;
+    }
+
     public Row reduceRowToOne() {
         Fraction leadingEntry = this.findLeadingEntry();
         if (!new Fraction(0, 1).equals(leadingEntry)) {

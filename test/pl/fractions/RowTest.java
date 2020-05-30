@@ -72,6 +72,30 @@ public class RowTest {
 
     }
 
+    @Test
+    public void shouldFindLeadingEntryColumnWork() {
+        Row row = new Row(new Fraction[]{
+                new Fraction(1, 2), new Fraction(7, 1), new Fraction(-1, 1), new Fraction(0, 1)});
+        assertEquals(0, row.findLeadingEntryColumn());
+
+        row = new Row(new Fraction[]{
+                new Fraction(0, 2), new Fraction(7, 1), new Fraction(-1, 1), new Fraction(0, 1)});
+        assertEquals(1, row.findLeadingEntryColumn());
+
+        row = new Row(new Fraction[]{
+                new Fraction(0, 2), new Fraction(1, 1), new Fraction(-1, 7), new Fraction(0, 1)});
+        assertEquals(1, row.findLeadingEntryColumn());
+
+        row = new Row(new Fraction[]{
+                new Fraction(0, 2), new Fraction(0, 1), new Fraction(-1, 7), new Fraction(0, 1)});
+        assertEquals(2, row.findLeadingEntryColumn());
+
+        row = new Row(new Fraction[]{
+                new Fraction(0, 2), new Fraction(0, 1), new Fraction(0, 7), new Fraction(0, 1)});
+        assertEquals(4, row.findLeadingEntryColumn());
+
+    }
+
 
 
     @Test
@@ -98,6 +122,12 @@ public class RowTest {
                 new Fraction(7, 15), new Fraction(0, 7), new Fraction(3, -12)});
         rowExpected = new Row(new Fraction[]{
                 new Fraction(1, 1), new Fraction(0, 1), new Fraction(-15, 28)});
+        assertEquals(rowExpected, row.reduceRowToOne());
+
+        row = new Row(new Fraction[]{
+                new Fraction(0, 15), new Fraction(0, 7), new Fraction(0, -12)});
+        rowExpected = new Row(new Fraction[]{
+                new Fraction(0, 1), new Fraction(0, 1), new Fraction(0, 1)});
         assertEquals(rowExpected, row.reduceRowToOne());
     }
 
