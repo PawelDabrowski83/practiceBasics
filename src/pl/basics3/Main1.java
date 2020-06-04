@@ -1,5 +1,7 @@
 package pl.basics3;
 
+import java.util.Arrays;
+
 public class Main1 {
 
     public static void main(String[] args) {
@@ -24,6 +26,11 @@ public class Main1 {
     public static String decimalToAny(int decimal, int base) {
         if (decimal == 0 || base > 36) {
             return "0";
+        }
+        if (base == 1) {
+            char[] chars = new char[decimal];
+            Arrays.fill(chars, '1');
+            return new String(chars);
         }
         StringBuilder builder = new StringBuilder();
         int number = decimal;
