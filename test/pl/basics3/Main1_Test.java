@@ -2,7 +2,10 @@ package pl.basics3;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 public class Main1_Test {
 
@@ -23,4 +26,68 @@ public class Main1_Test {
         // then
         assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void shouldDecimalToAnyWork() {
+        // given
+        int[] numbers = {2, 2, 8, 9, 10, 1, 11, 13, 7};
+        int[] base = {2, 8, 8, 8, 8, 8, 8, 8, 4};
+        String[] expected = {"10", "2", "10", "11", "12", "1", "13", "15", "13"};
+
+        // when
+        int counter = 0;
+        String[] actual = new String[expected.length];
+        for (int ignored : numbers) {
+            actual[counter] = Main1.decimalToAny(numbers[counter], base[counter]);
+            counter++;
+        }
+        System.out.println(Arrays.toString(actual));
+
+        // then
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldDecimalToAnyWork1() {
+        // given
+        int number = 2;
+        int base = 8;
+        String expected = "2";
+
+        // when
+        String actual = Main1.decimalToAny(number, base);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldDecimalToAnyTarget36Work() {
+        // given
+        int number = 1000;
+        int targetRadix = 36;
+        String expected = "rs";
+
+        // when
+        String actual = Main1.decimalToAny(number, targetRadix);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldDecimalToAnyTarget16ThriceBaseWork() {
+        // given
+        int number = 48;
+        int targetRadix = 16;
+        String expected = "30";
+
+        // when
+        String actual = Main1.decimalToAny(number, targetRadix);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+
 }
