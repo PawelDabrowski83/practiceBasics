@@ -89,5 +89,65 @@ public class Main1_Test {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void shouldConvertFractionToRadixWork1() {
+        // given
+        double number = 0.234;
+        int radix = 7;
+        int precision = 5;
+        String expected = "0.14315";
+
+        // when
+        String actual = Main1.convertFractionToRedix(number, radix, precision);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldConvertFractionToRadixWork2() {
+        // given
+        double number = 0.234;
+        int radix = 36;
+        int precision = 3;
+        String expected = "0.8f9";
+
+        // when
+        String actual = Main1.convertFractionToRedix(number, radix, precision);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldConvertFractionToRadixWork3() {
+        // given
+        double number = 10.234;
+        int radix = 7;
+        int precision = 5;
+        String expected = "13.14315";
+
+        // when
+        String actual = Main1.convertFractionToRedix(number, radix, precision);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldConvertFractionToRadixWork4() {
+        // given
+        double number = 0.5168;
+        int radix = 19;
+        int precision = 5;
+        String expected = "0.9fadg";
+
+        // when
+        String actual = Main1.convertFractionToRedix(number, radix, precision);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
 
 }

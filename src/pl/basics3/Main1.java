@@ -52,4 +52,21 @@ public class Main1 {
         }
         return builder.reverse().toString();
     }
+
+    public static String convertFractionToRedix(double fraction, int radix, int precision) {
+        StringBuilder builder = new StringBuilder();
+        int numberAsInteger = (int) fraction;
+        builder.append(decimalToAny((int) fraction, radix))
+                .append(".");
+        double number = fraction - numberAsInteger;
+
+        int counter = precision;
+        while (counter > 0) {
+            number *= radix;
+            builder.append(decimalToAny((int) number, radix));
+            number -= (int) number;
+            counter--;
+        }
+        return builder.toString();
+    }
 }
