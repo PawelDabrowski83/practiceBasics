@@ -98,7 +98,7 @@ public class Main1_Test {
         String expected = "0.14315";
 
         // when
-        String actual = Main1.convertFractionToRedix(number, radix, precision);
+        String actual = Main1.convertFractionToRadix(number, radix, precision);
 
         // then
         assertEquals(expected, actual);
@@ -113,7 +113,7 @@ public class Main1_Test {
         String expected = "0.8f9";
 
         // when
-        String actual = Main1.convertFractionToRedix(number, radix, precision);
+        String actual = Main1.convertFractionToRadix(number, radix, precision);
 
         // then
         assertEquals(expected, actual);
@@ -128,7 +128,7 @@ public class Main1_Test {
         String expected = "13.14315";
 
         // when
-        String actual = Main1.convertFractionToRedix(number, radix, precision);
+        String actual = Main1.convertFractionToRadix(number, radix, precision);
 
         // then
         assertEquals(expected, actual);
@@ -143,11 +143,101 @@ public class Main1_Test {
         String expected = "0.9fadg";
 
         // when
-        String actual = Main1.convertFractionToRedix(number, radix, precision);
+        String actual = Main1.convertFractionToRadix(number, radix, precision);
 
         // then
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void shouldConvertNondecimalFractionToDecimalWork1() {
+        // given
+        String number = "0.234";
+        int radix = 7;
+        double expected = 0.358;
+
+        // when
+        double actual = Main1.convertNondecimalFractionToDecimal(number, radix);
+
+        // then
+        assertEquals(expected, actual, 0.001);
+    }
+
+    @Test
+    public void shouldConvertNondecimalFractionToDecimalWork2() {
+        // given
+        String number = "0.234";
+        int radix = 7;
+        double expected = 0.358;
+
+        // when
+        double actual = Main1.convertNondecimalFractionToDecimal(number, radix);
+
+        // then
+        assertEquals(expected, actual, 0.001);
+    }
+
+    @Test
+    public void shouldConvertNondecimalToAnotherRadixWork1() {
+        // given
+        String sourceNumber = "0.5168";
+        int sourceRadix = 10;
+        int targetRadix = 19;
+        String expected = "0.9fadg";
+
+        // when
+        String actual = Main1.convertNondecimalToAnotherRadix(sourceNumber, sourceRadix, targetRadix);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldConvertNondecimalToAnotherRadixWork2() {
+        // given
+        String sourceNumber = "10.234";
+        int sourceRadix = 10;
+        int targetRadix = 7;
+        String expected = "13.14315";
+
+        // when
+        String actual = Main1.convertNondecimalToAnotherRadix(sourceNumber, sourceRadix, targetRadix);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldConvertNondecimalToAnotherRadixWork3() {
+        // given
+        String sourceNumber = "af.xy";
+        int sourceRadix = 35;
+        int targetRadix = 17;
+        String expected = "148.g88a8";
+
+        // when
+        String actual = Main1.convertNondecimalToAnotherRadix(sourceNumber, sourceRadix, targetRadix);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldConvertNondecimalToAnotherRadixWork4() {
+        // given
+        String sourceNumber = "aaaaa.0";
+        int sourceRadix = 16;
+        int targetRadix = 24;
+        String expected = "22df2.00000";
+
+        // when
+        String actual = Main1.convertNondecimalToAnotherRadix(sourceNumber, sourceRadix, targetRadix);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+
 
 
 }
