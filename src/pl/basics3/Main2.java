@@ -8,10 +8,6 @@ public class Main2 {
         if (n <= 1) {
             return BigInteger.ONE;
         }
-        BigInteger result = BigInteger.valueOf(n);
-        if (n == 2) {
-            return BigInteger.TWO;
-        }
-        return result.multiply(calcDoubleFactorial(n - 2));
+        return BigInteger.valueOf(n).multiply(calcDoubleFactorial(n - 2));
     }
 }
