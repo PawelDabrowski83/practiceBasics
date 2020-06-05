@@ -7,7 +7,7 @@ import java.util.Arrays;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-public class Main1_Test {
+public class Main1Test {
 
     @Test
     public void shouldDecimalToBinaryWork() {
