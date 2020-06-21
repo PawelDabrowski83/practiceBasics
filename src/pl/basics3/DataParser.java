@@ -9,14 +9,14 @@ public class DataParser {
 
     public static String formatData(String input) {
         Matcher matcher = DATA_PATTERN.matcher(input);
-        String dd;
-        String mm;
-        String rrrr;
+        String day;
+        String month;
+        String year;
         if (matcher.find()) {
-            mm = matcher.group(2);
-            dd = matcher.group(3);
-            rrrr = matcher.group(1);
-            return String.format("%s/%s/%s", mm, dd, rrrr);
+            month = matcher.group(2);
+            day = matcher.group(3);
+            year = matcher.group(1);
+            return String.format("%s/%s/%s", month, day, year);
         }
         return "";
     }
