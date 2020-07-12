@@ -33,4 +33,19 @@ public class RegexFinderTest {
                 )
         );
     }
+
+    @DisplayName("Should containsWordLength() work")
+    @ParameterizedTest(name = "{index} => expected={0}, length={1}, sentence={2}")
+    @MethodSource("containsWordLengthArgumentsProvider")
+    void containsWordLength(boolean expected, int length, String sentence) {
+        assertEquals(expected, RegexFinder.containsWordLength(length, sentence));
+    }
+    private static Stream<Arguments> containsWordLengthArgumentsProvider() {
+        return Stream.of(
+                Arguments.of(true, 4, "Java is the most popular programming language"),
+                Arguments.of(true, 3, "Java is the most popular programming language"),
+                Arguments.of(false, 11, "Regular expression is hard to read, isnt it?"),
+                Arguments.of(true, 4, "Wow! How awesome is that!")
+        );
+    }
 }

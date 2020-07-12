@@ -19,4 +19,19 @@ public class RegexFinder {
         Matcher matcher = PATTERN.matcher(sentence);
         return matcher.find();
     }
+
+    /**
+     * Check if sentence have a word with given length.
+     * @param length - length of word, only [a-zA-Z] chars matter
+     * @param sentence - sentence to check
+     * @return - if true, there is a word with given length
+     */
+    public static boolean containsWordLength(int length, String sentence) {
+        if (length < 1 || sentence == null) {
+            return false;
+        }
+        String regex = ".*\\b[a-zA-Z]{" + length + "}[,.!?]?\\b.*";
+        Pattern pattern = Pattern.compile(regex);
+        return pattern.matcher(sentence).matches();
+    }
 }
