@@ -34,4 +34,16 @@ public class RegexFinder {
         Pattern pattern = Pattern.compile(regex);
         return pattern.matcher(sentence).matches();
     }
+
+    /**
+     * Removing extra spaces and tabulations, replacing them with single one. Trim included.
+     * @param given - text to transform
+     * @return - string without extra spaces
+     */
+    public static String removeExtraSpaces(String given) {
+        if (given == null) {
+            return "";
+        }
+        return given.replaceAll("[\\t\\s]+", " ").trim();
+    }
 }

@@ -48,4 +48,22 @@ public class RegexFinderTest {
                 Arguments.of(true, 4, "Wow! How awesome is that!")
         );
     }
+
+    @DisplayName("Should removeExtraSpaces() work")
+    @ParameterizedTest(name = "{index} => expected={0}, given={1}")
+    @MethodSource("removeExtraSpacesArgumentsProvider")
+    void removeExtraSpaces(String expected, String given) {
+        assertEquals(expected, RegexFinder.removeExtraSpaces(given));
+    }
+    private static Stream<Arguments> removeExtraSpacesArgumentsProvider() {
+        return Stream.of(
+                Arguments.of("Just a text", "Just                  a                   text"),
+                Arguments.of("The Java language was initially called Oak after an oak tree that stood outside" +
+                        " Gosling's office. Later the project went by the name Green and was finally renamed Java," +
+                        " from Java coffee.",
+                        "   The \tJava   language was initially called Oak after an oak tree \t\tthat stood" +
+                                "     outside Gosling's  office. Later the project went    by the     name Green" +
+                                "   and was finally \trenamed Java, \tfrom Java coffee.  ")
+        );
+    }
 }
