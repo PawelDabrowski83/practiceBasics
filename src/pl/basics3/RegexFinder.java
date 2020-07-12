@@ -44,6 +44,6 @@ public class RegexFinder {
         if (given == null) {
             return "";
         }
-        return given.replaceAll("[\\t\\s]+", " ").trim();
+        return given.replaceAll("\\s+", " ").trim();
     }
 }
