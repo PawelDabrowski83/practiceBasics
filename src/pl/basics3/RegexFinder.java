@@ -56,6 +56,18 @@ public class RegexFinder {
         if (given == null) {
             return "";
         }
-        return given.replaceAll("</?\\w+/?>", "");
+        return given.replaceAll("</?[\\w\\s-\"=]+/?>", "");
+    }
+
+    /**
+     * Remove java comments from given text (code)
+     * @param given - given text to modify
+     * @return - text with comments removed
+     */
+    public static String removeComments(String given) {
+        if (given == null) {
+            return "";
+        }
+        return given.replaceAll("//.*$|/\\*[\\s\\w,.?!*+=]+\\*/", "").trim();
     }
 }

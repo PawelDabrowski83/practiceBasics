@@ -79,4 +79,21 @@ public class RegexFinderTest {
                 Arguments.of("Header with bold text", "<h2>Header with <b>bold</b> text</h2>")
         );
     }
+
+    @DisplayName("Should removeComments() work")
+    @ParameterizedTest(name = "{index} => expected={0}, given={1}")
+    @MethodSource("removeCommentsArgumentsProvider")
+    void removeComments(String expected, String given) {
+        assertEquals(expected, RegexFinder.removeComments(given));
+    }
+    private static Stream<Arguments> removeCommentsArgumentsProvider() {
+        return Stream.of(
+                Arguments.of("Integer variable = new Integer(\"0\");",
+                        "Integer variable /* it only contains integers */= new Integer(\"0\"); // now contains zero"),
+                Arguments.of("String s = \"123\";",
+                        "/* new line */String /* we need String, not int */s /* bad name, I think */= \"123\";"),
+                Arguments.of("int b = 0; b = b * b ;",
+                        "int b = 0;/* expression */ b = b /* **/* b /* b * b = b squared */; // 0 * 0 = 0")
+        );
+    }
 }
