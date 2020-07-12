@@ -46,4 +46,16 @@ public class RegexFinder {
         }
         return given.replaceAll("\\s+", " ").trim();
     }
+
+    /**
+     * Remove html tags. Given null returns empty.
+     * @param given - text to modify
+     * @return output text
+     */
+    public static String removeTags(String given) {
+        if (given == null) {
+            return "";
+        }
+        return given.replaceAll("</?\\w+/?>", "");
+    }
 }

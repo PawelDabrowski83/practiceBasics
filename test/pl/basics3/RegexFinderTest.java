@@ -66,4 +66,17 @@ public class RegexFinderTest {
                                 "   and was finally \trenamed Java, \tfrom Java coffee.  ")
         );
     }
+
+    @DisplayName("Should removeTags() work")
+    @ParameterizedTest(name = "{index} => expected={0}, given={1}")
+    @MethodSource("removeTagsArgumentsProvider")
+    void removeTags(String expected, String given) {
+        assertEquals(expected, RegexFinder.removeTags(given));
+    }
+    private static Stream<Arguments> removeTagsArgumentsProvider() {
+        return Stream.of(
+                Arguments.of("Simple header", "<h1>Simple header</h1>"),
+                Arguments.of("Header with bold text", "<h2>Header with <b>bold</b> text</h2>")
+        );
+    }
 }
