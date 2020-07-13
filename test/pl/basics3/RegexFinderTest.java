@@ -126,4 +126,24 @@ public class RegexFinderTest {
                         "All Java programmers program good programs.")
         );
     }
+
+    @DisplayName("Should findPassword() work")
+    @ParameterizedTest(name = "{index} => expected={0}, given={1}")
+    @MethodSource("findPasswordArgumentsProvider")
+    void findPassword(String expected, String text) {
+        assertEquals(expected, RegexFinder.findPassword(text));
+    }
+    private static Stream<Arguments> findPasswordArgumentsProvider() {
+        return Stream.of(
+                Arguments.of("SECRET115\n" +
+                                "PASS111",
+                        "My email javacoder@gmail.com with password    SECRET115. Here is my old PASSWORD: PASS111."),
+                Arguments.of("No passwords found.",
+                        "My email is javacoder@gmail.com."),
+                Arguments.of("1234567\n" +
+                            "SECRETSECRET\n" +
+                            "PassWord",
+                        "PASSWORD: 1234567 ABDFSDJFJDFHSIF password:SECRETSECRET and and and oeirjorejtoe 834038053 Pass 2394204204 and PAssWoRd PassWord")
+        );
+    }
 }

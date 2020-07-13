@@ -125,4 +125,34 @@ public class RegexFinder {
         }
         return builder.toString();
     }
+
+    /**
+     * Finds password strings in given text
+     * @param text
+     * @return Output all passwords found in the text, each password starting with a new line. If the text does not
+     * contain any passwords, output "No passwords found." without quotes.
+     */
+    public static String findPassword(String text) {
+        if (text == null || text.isEmpty()) {
+            return "";
+        }
+        String regex = "password[\\s:]+(\\w+\\b)";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(text);
+        StringBuilder builder = new StringBuilder();
+        boolean firstLine = true;
+        while(matcher.find()) {
+            if (!firstLine) {
+                builder.append(System.lineSeparator());
+            } else {
+                firstLine = false;
+            }
+            builder.append(matcher.group(1));
+        }
+        matcher.reset();
+        if (!matcher.find()) {
+            builder.append("No passwords found.");
+        }
+        return builder.toString();
+    }
 }
