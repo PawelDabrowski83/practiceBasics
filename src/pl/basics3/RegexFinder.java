@@ -68,6 +68,6 @@ public class RegexFinder {
         if (given == null) {
             return "";
         }
-        return given.replaceAll("//.*$|/\\*[\\s\\w,.?!*+=]+\\*/", "").trim();
+        return given.replaceAll("/\\*[\\s\\w*-=]*?\\*/|//.*", "").trim();
     }
 }
