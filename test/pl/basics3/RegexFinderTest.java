@@ -110,4 +110,20 @@ public class RegexFinderTest {
                         "If X is 609348676234, Y is 3077, the sum is 609348679311.")
         );
     }
+
+    @DisplayName("Should findWord() work")
+    @ParameterizedTest(name = "{index} => expected={0}, word={1}, text={2}")
+    @MethodSource("findWordArgumentsProvider")
+    void findWord(String expected, String word, String text) {
+        assertEquals(expected, RegexFinder.findWord(word, text));
+    }
+    private static Stream<Arguments> findWordArgumentsProvider() {
+        return Stream.of(
+                Arguments.of("9 programmers\n" +
+                        "21 program\n" +
+                        "34 programs",
+                        "program",
+                        "All Java programmers program good programs.")
+        );
+    }
 }

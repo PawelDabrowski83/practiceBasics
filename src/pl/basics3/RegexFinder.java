@@ -96,4 +96,33 @@ public class RegexFinder {
         }
         return builder.toString();
     }
+
+    /**
+     * Find all appearances of given word in text.
+     * @param word to look for
+     * @param text to search in
+     * @return string Multiple lines where each line contains two parts separated by one whitespace: the starting
+     * index of the word and the word itself.
+     */
+    public static String findWord(String word, String text) {
+        if (word == null || text == null || word.isEmpty() || text.isEmpty()) {
+            return "";
+        }
+        String regex = "(\\b[\\w]*?" + word + ".*?\\b)";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(text);
+        StringBuilder builder = new StringBuilder();
+        boolean firstLine = true;
+        while(matcher.find()) {
+            if (!firstLine) {
+                builder.append(System.lineSeparator());
+            } else {
+                firstLine = false;
+            }
+            builder.append(matcher.start());
+            builder.append(" ");
+            builder.append(text, matcher.start(), matcher.end());
+        }
+        return builder.toString();
+    }
 }
