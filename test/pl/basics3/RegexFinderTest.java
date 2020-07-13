@@ -96,4 +96,18 @@ public class RegexFinderTest {
                         "int b = 0;/* expression */ b = b /* **/* b /* b * b = b squared */; // 0 * 0 = 0")
         );
     }
+
+    @DisplayName("Should extractLargeNumbers() work")
+    @ParameterizedTest(name = "{index} => expected={0}, given={1}")
+    @MethodSource("extractLargeNumbersArgumentsProvider")
+    void extractLargeNumbers(String expected, String given) {
+        assertEquals(expected, RegexFinder.extractLargeNumbers(given));
+    }
+    private static Stream<Arguments> extractLargeNumbersArgumentsProvider() {
+        return Stream.of(
+                Arguments.of("609348676234:12\n" +
+                        "609348679311:12",
+                        "If X is 609348676234, Y is 3077, the sum is 609348679311.")
+        );
+    }
 }

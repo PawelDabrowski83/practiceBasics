@@ -70,4 +70,30 @@ public class RegexFinder {
         }
         return given.replaceAll("/\\*[\\s\\w*-=]*?\\*/|//.*", "").trim();
     }
+
+    /**
+     * Extract large numbers (more than 10 digits) from given text
+     * @param given - text to look for numbers
+     * @return - string with numbers in format \d:(length)
+     */
+    public static String extractLargeNumbers(String given) {
+        if (given == null || given.isEmpty()) {
+            return "";
+        }
+        StringBuilder builder = new StringBuilder();
+        Pattern pattern = Pattern.compile("(\\d{10,})");
+        Matcher matcher = pattern.matcher(given);
+        boolean firstLine = true;
+        while (matcher.find()) {
+            if (!firstLine) {
+                builder.append(System.lineSeparator());
+            } else {
+                firstLine = false;
+            }
+            builder.append(given, matcher.start(), matcher.end());
+            builder.append(":");
+            builder.append(matcher.end() - matcher.start());
+        }
+        return builder.toString();
+    }
 }
