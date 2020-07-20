@@ -32,7 +32,11 @@ public class AbbreviatorTest {
                 Arguments.of("i9y", "indubitably"),
                 Arguments.of("s8s", "suspicious"),
                 Arguments.of("e6t r2e", "elephant-ride"),
-                Arguments.of("a8y", "accurately")
+                Arguments.of("a8y", "accurately"),
+                Arguments.of("r3s!", "rides!"),
+                Arguments.of(".r4y", ".really"),
+                Arguments.of("(fun)", "(fun)"),
+                Arguments.of("in...", "in...")
         );
     }
 }
