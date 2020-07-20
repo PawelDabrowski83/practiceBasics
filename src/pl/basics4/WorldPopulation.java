@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,14 +20,14 @@ public class WorldPopulation {
     protected static final Logger logger = Logger.getLogger(WorldPopulation.class.getName());
     protected static FileHandler fh;
 
-    protected Map<Integer, Long> worldPopulation;
+    protected Map<Integer, Long> population;
 
     public Map<Integer, Long> getWorldPopulation() {
-        return worldPopulation;
+        return population;
     }
 
-    public void setWorldPopulation(Map<Integer, Long> worldPopulation) {
-        this.worldPopulation = worldPopulation;
+    public void setWorldPopulation(Map<Integer, Long> population) {
+        this.population = population;
     }
 
     public Map<Integer, Long> readDataFromFile(File file) throws IOException {
@@ -61,5 +63,45 @@ public class WorldPopulation {
             }
         }
         return targetMap;
+    }
+
+    /**
+     * Find in which year there was largest increase of world population
+     * @param map key Integer year, value Long population
+     * @return year of greatest increase
+     */
+    public int findLargestIncrease(Map<Integer, Long> map) {
+        Set<Integer> years = new TreeSet<>(map.keySet());
+//        List<Integer> years = new ArrayList<>(map.keySet());
+        int largestIncreaseYear = 0;
+        long largestIncrease = 0L;
+        boolean firstLine = true;
+        for (int year : years) {
+            if (firstLine) {
+                firstLine = false;
+                continue;
+            }
+            long currentPopulation = map.get(year);
+            long previousPopulation = map.get(year - 1);
+            long increase = currentPopulation - previousPopulation;
+            if (increase > largestIncrease) {
+                largestIncrease = increase;
+                largestIncreaseYear = year;
+            }
+        }
+        return largestIncreaseYear;
+    }
+
+    public static int solve() {
+        String filepath = "files/dataset_91069.txt";
+        File file = new File(filepath);
+        WorldPopulation worldPopulation = new WorldPopulation();
+        try {
+            worldPopulation.setWorldPopulation(worldPopulation.readDataFromFile(file));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return worldPopulation.findLargestIncrease(worldPopulation.population);
     }
 }
