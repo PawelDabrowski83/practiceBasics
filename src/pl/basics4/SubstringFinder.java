@@ -15,7 +15,7 @@ public class SubstringFinder {
         return text;
     }
 
-    protected int countOccurances(String textToMatch) {
+    protected int countOccurences(String textToMatch) {
         if (text == null || text.isEmpty() || textToMatch == null || textToMatch.isEmpty()) {
             return 0;
         }

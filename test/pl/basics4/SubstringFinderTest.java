@@ -12,13 +12,13 @@ import static org.junit.Assert.assertEquals;
 
 public class SubstringFinderTest {
 
-    @DisplayName("should countOccurances returns number of substring occurance in given text")
+    @DisplayName("should countOccurences returns number of substring occurence in given text")
     @ParameterizedTest(name = "{index} => expected={0}, substring={1}, text={2}")
-    @MethodSource("countOccurancesArgumentsProvider")
-    void countOccurances(int expected, SubstringFinder substringFinder, String text) {
-        assertEquals(expected, substringFinder.countOccurances(text));
+    @MethodSource("countOccurencesArgumentsProvider")
+    void countOccurences(int expected, SubstringFinder substringFinder, String text) {
+        assertEquals(expected, substringFinder.countOccurences(text));
     }
-    private static Stream<Arguments> countOccurancesArgumentsProvider() {
+    private static Stream<Arguments> countOccurencesArgumentsProvider() {
         return Stream.of(
                 Arguments.of(
                         1,
