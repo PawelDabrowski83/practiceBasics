@@ -1,5 +1,9 @@
 package pl.basics5;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Enough is enough!
  *
@@ -18,11 +22,30 @@ package pl.basics5;
  */
 public class DeleteOccurencesBeyondLimit {
     /**
-     *
-     * @param source
-     * @param limit
-     * @return
+     * remove repeated elements within and beyond limit from source array without changing order
+     * @param source given array
+     * @param limit should be greater than 0
+     * @return target array
      */
     public static int[] deleteNth(int[] source, int limit) {
+        if (limit < 0) {
+            limit = 1;
+        }
+        if (limit == 1 || source == null || source.length == 0) {
+            return new int[0];
+        }
+        List<Integer> heap = new LinkedList<>();
+        Integer[] given = Arrays.stream(source).boxed().toArray(Integer[]::new);
+        for (Integer i : given) {
+            if (countRepetitions(i, heap) <= limit - 2) {
+                heap.add(i);
+            }
+        }
+        return heap.stream().unordered().mapToInt(Integer::intValue).toArray();
+
+    }
+
+    private static int countRepetitions(Integer i, List<Integer> list) {
+        return (int) list.stream().filter(n -> n.equals(i)).count();
     }
 }
