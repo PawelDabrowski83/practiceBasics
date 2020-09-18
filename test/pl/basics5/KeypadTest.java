@@ -20,7 +20,8 @@ public class KeypadTest {
         return Stream.of(
                 Arguments.of(9, "LOL"),
                 Arguments.of(13, "HOW R U"),
-                Arguments.of(0, "")
+                Arguments.of(0, ""),
+                Arguments.of(9, ".LOL!")
         );
     }
 }
