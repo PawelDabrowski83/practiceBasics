@@ -1,5 +1,8 @@
 package pl.basics5;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Write a module that can calculate the amount of button presses required for any phrase. Punctuation can be ignored
  * for this exercise. Likewise, you can assume the phone doesn't distinguish between upper/lowercase characters (but
@@ -30,6 +33,23 @@ public class Keypad {
         if (given == null || given.isEmpty()) {
             return sum;
         }
+        Map<Character, Integer> buffer = new HashMap<>();
+        for (char c : given.toCharArray()){
+            Character uppercaseChar = Character.toUpperCase(c);
+            if (buffer.containsKey(uppercaseChar)){
+                sum += buffer.get(uppercaseChar);
+            } else {
+                for (Key key : keys){
+                    int countPresses = key.press(uppercaseChar);
+                    if (countPresses > 0) {
+                        sum += countPresses;
+                        buffer.put(uppercaseChar, countPresses);
+                        break;
+                    }
+                }
+            }
+
+        }
 
         return sum;
     }
@@ -39,10 +59,6 @@ public class Keypad {
 
         public Key(char[] chars) {
             this.chars = chars;
-        }
-
-        public char[] getChars() {
-            return chars;
         }
 
         public int press(char desired){
