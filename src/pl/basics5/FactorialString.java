@@ -39,6 +39,8 @@ public class FactorialString {
         for (char c : chars){
             if(c == '-'){
                 result[i] = -1;
+                i++;
+                continue;
             }
             int digit = -1;
             try {
