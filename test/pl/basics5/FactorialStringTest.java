@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FactorialStringTest {
@@ -58,4 +59,22 @@ public class FactorialStringTest {
                 Arguments.of(false, " ")
         );
     }
+
+    @DisplayName("should convertStringToIntArray produce int array with digits only")
+    @ParameterizedTest
+    @MethodSource("convertStringToIntArrayArgumentsProvider")
+    void convertStringToIntArrayArgumentsProvider(int[] expected, String given){
+        assertArrayEquals(expected, FactorialString.convertStringToIntArray(given));
+    }
+    private static Stream<Arguments> convertStringToIntArrayArgumentsProvider(){
+        return Stream.of(
+                Arguments.of(new int[]{1, 0, 0}, "100"),
+                Arguments.of(new int[]{1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0}, "12345678901234567890"),
+                Arguments.of(new int[]{-1, 4}, "-4"),
+                Arguments.of(new int[]{-1, 1, 4}, "-14"),
+                Arguments.of(new int[]{0}, "0"),
+                Arguments.of(new int[0], "")
+        );
+    }
+
 }
