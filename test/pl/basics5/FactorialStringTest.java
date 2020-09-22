@@ -35,4 +35,27 @@ public class FactorialStringTest {
                 Arguments.of("", "jfwjfwf", "..,")
         );
     }
+
+    @DisplayName("should isValidNumber check if given string matches with number pattern")
+    @ParameterizedTest
+    @MethodSource("isValidNumberArgumentsProvider")
+    void isValidNumber(boolean expected, String given){
+        assertEquals(expected, FactorialString.isValidNumber(given));
+    }
+    private static Stream<Arguments> isValidNumberArgumentsProvider(){
+        return Stream.of(
+                Arguments.of(true, "4"),
+                Arguments.of(true, "-10"),
+                Arguments.of(true, "0"),
+                Arguments.of(true, "11"),
+                Arguments.of(true, "24824294704234927092740420957027403248092750223048028520385023840720705209483"),
+                Arguments.of(false, "-0"),
+                Arguments.of(false, "kot"),
+                Arguments.of(false, ";"),
+                Arguments.of(false, "18k"),
+                Arguments.of(false, "-y"),
+                Arguments.of(false, ""),
+                Arguments.of(false, " ")
+        );
+    }
 }
