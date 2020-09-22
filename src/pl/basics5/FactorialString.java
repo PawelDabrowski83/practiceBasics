@@ -5,4 +5,10 @@ package pl.basics5;
  * should be done on numbers represented as strings
  */
 public class FactorialString {
+    public static String multiplicateString(String base, String factor) {
+        if (base == null || base.isBlank() || factor == null || factor.isBlank()){
+            return "";
+        }
+        return " ";
+    }
 }
