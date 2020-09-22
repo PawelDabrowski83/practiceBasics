@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  * should be done on numbers represented as strings
  */
 public class FactorialString {
-    protected static final Pattern NUMBER = Pattern.compile("^(-?[0-9]|-?[1-9]\\d*)$");
+    protected static final Pattern NUMBER = Pattern.compile("^(-?[1-9]|0|-?[1-9]\\d*)$");
 
     public static String multiplicateString(String base, String factor) {
         if (base == null || base.isBlank() || factor == null || factor.isBlank()){
@@ -18,6 +18,9 @@ public class FactorialString {
     }
 
     protected static boolean isValidNumber(String given){
-        return false;
+        if (given == null || given.isBlank()){
+            return false;
+        }
+        return NUMBER.matcher(given).matches();
     }
 }
