@@ -44,4 +44,23 @@ public class MorseCodeTest {
                 Arguments.of(-1, new String[]{"a", "-1", "c"}, "")
         );
     }
+
+    @DisplayName("should decodeLetter() work")
+    @ParameterizedTest
+    @MethodSource("decodeLetterArgumentsProvider")
+    void decodeLetter(String expected, String morse){
+        assertEquals(expected, MorseCode.decodeLetter(morse));
+    }
+    private static Stream<Arguments> decodeLetterArgumentsProvider(){
+        return Stream.of(
+                Arguments.of("A", ".-"),
+                Arguments.of("C", "-.-."),
+                Arguments.of("S", "..."),
+                Arguments.of("P", ".---."),
+                Arguments.of("J", ".---"),
+                Arguments.of("4", "....-"),
+                Arguments.of("9", "----."),
+                Arguments.of("?", "..--..")
+        );
+    }
 }
