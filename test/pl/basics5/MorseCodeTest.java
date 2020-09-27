@@ -20,7 +20,7 @@ public class MorseCodeTest {
     private static Stream<Arguments> decodeArgumentsProvider(){
         return Stream.of(
                 Arguments.of("HEY JUDE", ".... . -.--   .--- ..- -.. ."),
-                Arguments.of("SOS", "···−−−···"),
+                Arguments.of("SOS", "...---..."),
                 Arguments.of("A", ".-"),
                 Arguments.of("1", ".----"),
                 Arguments.of("Q", "--.-")
