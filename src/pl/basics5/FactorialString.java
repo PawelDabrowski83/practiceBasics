@@ -1,6 +1,5 @@
 package pl.basics5;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -17,9 +16,25 @@ public class FactorialString {
         if (!isValidNumber(base) || !isValidNumber(factor)){
             return "";
         }
-        char[] baseArray = base.toCharArray();
-        char[] factorArray = factor.toCharArray();
-        return " ";
+        int[] baseArray = convertStringToIntArray(base);
+        int[] factorArray = convertStringToIntArray(factor);
+        int factorNumber = factorArray[0];
+        StringBuilder builder = new StringBuilder();
+        int remainder = 0;
+        for (int i = baseArray.length - 1; i >= 0; i--){
+            int result =  baseArray[i] * factorNumber + remainder;
+            if (result < 10){
+                builder.append(result);
+                remainder = 0;
+            } else {
+                builder.append(result % 10);
+                remainder = result / 10;
+            }
+        }
+        if (remainder > 0){
+            builder.append(remainder);
+        }
+        return builder.reverse().toString();
     }
 
     protected static boolean isValidNumber(String given){
