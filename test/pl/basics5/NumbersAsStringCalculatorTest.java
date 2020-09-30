@@ -20,8 +20,8 @@ public class NumbersAsStringCalculatorTest {
     }
     private static Stream<Arguments> addArgumentsProvider(){
         return Stream.of(
-                Arguments.of("4", "2", "2"),
-                Arguments.of("10", "2", "8"),
+//                Arguments.of("4", "2", "2"),
+//                Arguments.of("10", "2", "8"),
                 Arguments.of("11", "11", "0"),
                 Arguments.of("100", "50", "50"),
                 Arguments.of("111", "1", "110"),
