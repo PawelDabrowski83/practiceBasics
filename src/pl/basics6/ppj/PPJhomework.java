@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class PPJhomework {
 
     public static void main(String[] args) {
-        task10();
     }
 
     /*
@@ -53,6 +52,7 @@ bedace wynikiem mnozenia kolejnej wartosci zmiennej petli i zmiennej wrt
     Utwórz program wyswietlajacy na ekran pierwsze 10 elementów szeregu geometrycznego 1 / 2^n; n = 0 -> Inf
      */
     static void task04(){
+        double sum = 0;
         for (int i = 0; i < 10; i++){
             System.out.println("Wartość wyrazu n: " + i);
             int base = 2;
@@ -66,7 +66,8 @@ bedace wynikiem mnozenia kolejnej wartosci zmiennej petli i zmiennej wrt
                 }
             }
             double value = 1.0 / valueOfPower;
-            System.out.println(value);
+            sum += value;
+            System.out.println(sum);
             System.out.println();
         }
     }
@@ -158,19 +159,18 @@ zawartosc.
      */
     static void task08(){
         byte[] first = {2, 1, 0, 1};
-        byte[] second = {2, 1, 0, 1};
+        byte[] second = {2, 1, 0, 1, 2};
 
         boolean isEqual = true;
 
         if (first.length != second.length){
             isEqual = false;
-        } else {
-            for (int i = 0; i < first.length && isEqual; i++){
-                if (first[i] != second[i]){
-                    isEqual = false;
-                }
-            }
         }
+
+        for (int i = 0; i < first.length && isEqual; i++){
+            isEqual = first[i] == second[i];
+        }
+
         String answer = isEqual ? "Tablice mają identyczną zawartość." : "Tablice nie mają identycznej zawartości.";
         System.out.println(answer);
     }
@@ -226,13 +226,74 @@ wartosci 0.
 
         int[] randomized = new int[arraySize];
 
-        for (int i = 0; i < arraySize; i++){
-            
+        int randomizeStep = 0;
+        while (randomizeStep < arraySize){
+
+            int randomNumber = (int) (Math.random() * (array.length));
+            randomized[randomizeStep] = array[randomNumber];
+
+            int[] temp = new int[array.length - 1];
+            for (int i = 0; i < temp.length; i++){
+                if (i < randomNumber){
+                    temp[i] = array[i];
+                } else {
+                    temp[i] = array[i+1];
+                }
+            }
+            array = temp;
+            randomizeStep++;
         }
 
-        for (int number : array){
-            System.out.print(number + ", ");
+        for (int headers : randomized) {
+            System.out.print(headers + " ");
         }
+        System.out.println();
+
+        for (int rows = 0; rows < randomized.length; rows++){
+            for (int cols = 0; cols < randomized.length; cols++){
+                int randomValue = randomized[cols];
+                String print = rows == randomValue ? "*" : ".";
+                System.out.print(print);
+                if(cols != randomized.length - 1){
+                    if(randomValue >= 10){
+                        System.out.print("  ");
+                    } else {
+                        System.out.print(" ");
+                    }
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    /*
+    Wprowadz z klawiatury 9 cyfr i przechowaj kazda z nich w kolejnych elementach
+10 elementowej tablicy ISBN. Nastepnie uzupełnij ostatnia 10 wartosc jako sume
+kontrolna.
+     */
+    static void task11(){
+        Scanner scanner = new Scanner(System.in);
+        int[] ISBN = new int[10]; // there is no validation here, because task is implying that input is only digits
+
+        int counter = 0;
+        while(counter < 9){
+            ISBN[counter] = scanner.nextInt();
+            counter++;
+        }
+
+        int sum = 0;
+        int step = 10;
+        for (int number : ISBN){
+            sum += number * step--;
+        }
+        int checksum = 11 - sum % 11;
+        ISBN[9] = checksum;
+
+        System.out.print("Full ISBN number: ");
+        for (int i : ISBN){
+            System.out.print(i);
+        }
+        System.out.println();
 
     }
 }
