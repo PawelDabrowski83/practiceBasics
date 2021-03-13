@@ -1,4 +1,4 @@
-package pl.basics6.ppj;
+package pl.basics6.ppj.other;
 
 import java.util.Arrays;
 

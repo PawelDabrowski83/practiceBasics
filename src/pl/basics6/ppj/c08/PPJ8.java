@@ -1,5 +1,7 @@
 package pl.basics6.ppj.c08;
 
+import pl.basics6.ppj.other.Person;
+
 public class PPJ8 {
     public static void main(String[] args) {
         task05();
