@@ -1,4 +1,4 @@
-package pl.basics9.ppj.javafx;
+package pl.basics9.gui.w01.javafx;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;

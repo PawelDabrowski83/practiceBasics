@@ -1,4 +1,4 @@
-package pl.basics9.ppj;
+package pl.basics9.gui.w01.persons;
 
 public class Element<T extends Person> {
 

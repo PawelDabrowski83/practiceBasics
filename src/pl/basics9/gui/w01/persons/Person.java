@@ -1,4 +1,4 @@
-package pl.basics9.ppj;
+package pl.basics9.gui.w01.persons;
 
 public abstract class Person implements Comparable<Person>{
 
@@ -11,6 +11,14 @@ public abstract class Person implements Comparable<Person>{
     }
 
     public abstract String getDesc();
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
 
     @Override
     public int compareTo(Person person) {

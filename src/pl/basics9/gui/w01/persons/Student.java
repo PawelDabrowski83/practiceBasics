@@ -1,4 +1,4 @@
-package pl.basics9.ppj;
+package pl.basics9.gui.w01.persons;
 
 public class Student extends Person {
 
@@ -14,5 +14,12 @@ public class Student extends Person {
         return "Student " + id;
     }
 
-
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", id='" + id + '\'' +
+                '}';
+    }
 }
