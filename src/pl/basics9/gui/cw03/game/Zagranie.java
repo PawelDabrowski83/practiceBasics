@@ -9,7 +9,7 @@ public enum Zagranie {
         if (z1 == z2) {
             return 0;
         }
-        return beat(z1) == z2 ? 1 : -1;
+        return beat(z2) == z1 ? 1 : -1;
     }
 
     public static Zagranie beat(Zagranie move) {
