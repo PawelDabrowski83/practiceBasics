@@ -46,6 +46,7 @@ public class Main extends JFrame {
         DataInputPanel dip = new DataInputPanel();
 
         DefaultListModel<Student> dlm = new DefaultListModel<>();
+
         for (Student student : studentList) {
             dlm.add(0, student);
         }
