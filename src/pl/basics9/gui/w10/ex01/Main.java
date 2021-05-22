@@ -36,7 +36,6 @@ public class Main extends JFrame {
         this.add(jTable);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.pack();
         this.setVisible(true);
     }
 }
