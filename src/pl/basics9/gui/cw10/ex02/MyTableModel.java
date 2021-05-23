@@ -31,4 +31,9 @@ public class MyTableModel extends AbstractTableModel {
             default -> throw new IllegalStateException();
         };
     }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return (columnIndex == 3);
+    }
 }
