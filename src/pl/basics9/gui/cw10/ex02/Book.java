@@ -1,9 +1,9 @@
 package pl.basics9.gui.cw10.ex02;
 
 public class Book {
-    private String authorFirstName;
-    private String authorLastName;
-    private String title;
+    private final String authorFirstName;
+    private final String authorLastName;
+    private final String title;
     private double price;
 
     public Book(String authorFirstName, String authorLastName, String title, double price) {
