@@ -1,6 +1,8 @@
 package pl.basics9.gui.cw10.ex02;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
     private final String authorFirstName;
     private final String authorLastName;
     private final String title;

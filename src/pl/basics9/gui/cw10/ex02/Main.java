@@ -10,7 +10,9 @@ public class Main {
                 jFrame.setSize(800, 600);
                 jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
+                MyTableModel myTableModel = new MyTableModel();
+                JTable jTable = new JTable();
+                jTable.setModel();
 
 
                 jFrame.setVisible(true);
