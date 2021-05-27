@@ -17,6 +17,7 @@ public class Main {
         for (Thread t : letters.getThreads()) {
             t.interrupt();
         }
+        Thread.sleep(1000);
 
 
         System.out.println("Program zakończył działanie");
