@@ -3,15 +3,18 @@ package pl.basics12.codewars.simpleEncryption1;
 public class Kata {
 
     public static String encrypt(final String text, final int n) {
-        if (text == null || text.isBlank()) {
+        if (isNullOrBlank(text)) {
             return text;
         }
         String result = text;
-        int counter = n;
-        while (counter-- > 0) {
+        for (int i = n; i > 0; i--) {
             result = encode(result);
         }
         return result;
+    }
+
+    private static boolean isNullOrBlank(String text) {
+        return text == null || text.isBlank();
     }
 
     private static String encode(final String text) {
@@ -26,7 +29,7 @@ public class Kata {
     }
 
     public static String decrypt(final String encryptedText, final int n) {
-        if (encryptedText == null || encryptedText.isBlank()) {
+        if (isNullOrBlank(encryptedText)) {
             return encryptedText;
         }
         String result = encryptedText;
