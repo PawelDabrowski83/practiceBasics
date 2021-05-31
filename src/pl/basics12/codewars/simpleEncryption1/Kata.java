@@ -18,14 +18,17 @@ public class Kata {
     }
 
     private static String encode(final String text) {
+        return  takeSecondCharStartingAt(1, text)
+                .append(takeSecondCharStartingAt(0, text))
+                .toString();
+    }
+
+    private static StringBuilder takeSecondCharStartingAt(int start, String text) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 1; i < text.length(); i += 2) {
+        for (int i = start; i < text.length(); i += 2) {
             stringBuilder.append(text.charAt(i));
         }
-        for (int i = 0; i < text.length(); i += 2) {
-            stringBuilder.append(text.charAt(i));
-        }
-        return stringBuilder.toString();
+        return stringBuilder;
     }
 
     public static String decrypt(final String encryptedText, final int n) {
