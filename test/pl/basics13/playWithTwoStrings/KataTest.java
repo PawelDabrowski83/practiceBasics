@@ -22,4 +22,11 @@ public class KataTest {
         assertFalse(Kata.isCharPresent('z', "xeddex"));
         assertFalse(Kata.isCharPresent('.', ""));
     }
+
+    @Test
+    public void swapTest() {
+        assertEquals('a', Kata.swap('A'));
+        assertEquals('Z', Kata.swap('z'));
+        assertEquals(' ', Kata.swap(' '));
+    }
 }
