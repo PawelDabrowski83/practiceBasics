@@ -1,6 +1,8 @@
 package pl.basics13.playWithTwoStrings;
 
+import java.util.Arrays;
 import java.util.Locale;
+import java.util.stream.IntStream;
 
 public class Kata {
     public static String workOnStrings(String abc, String cde) {
@@ -25,5 +27,9 @@ public class Kata {
 
     protected static char swap(char c) {
         return Character.isUpperCase(c) ? Character.toLowerCase(c) : Character.toUpperCase(c);
+    }
+
+    protected static int countChar(char c, String str) {
+        return (int) str.chars().filter(n -> n == c).count();
     }
 }

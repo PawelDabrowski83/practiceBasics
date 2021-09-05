@@ -29,4 +29,12 @@ public class KataTest {
         assertEquals('Z', Kata.swap('z'));
         assertEquals(' ', Kata.swap(' '));
     }
+
+    @Test
+    public void countCharTest() {
+        assertEquals(0, Kata.countChar('a', "zxy"));
+        assertEquals(0, Kata.countChar('a', ""));
+        assertEquals(1, Kata.countChar('c', "abc"));
+        assertEquals(2, Kata.countChar('a', "aba"));
+    }
 }
