@@ -1,13 +1,11 @@
 package pl.basics13.playWithTwoStrings;
 
-import java.util.Arrays;
 import java.util.Locale;
-import java.util.stream.IntStream;
 
 public class Kata {
     public static String workOnStrings(String abc, String cde) {
-        StringBuilder stringBuilder = new StringBuilder();
-        return "";
+        return  transformString(abc, cde) +
+                transformString(cde, abc);
     }
 
     protected static boolean isCharPresent(char c, String str) {
@@ -18,11 +16,14 @@ public class Kata {
         StringBuilder stringBuilder = new StringBuilder();
         char[] chars = source.toCharArray();
         for (char c : chars) {
-            if (isCharPresent(c, filter)) {
-
+            int charRepetitions = countChar(c, filter);
+            if (charRepetitions % 2 == 0) {
+                stringBuilder.append(c);
+            } else {
+                stringBuilder.append(swap(c));
             }
         }
-        return "";
+        return stringBuilder.toString();
     }
 
     protected static char swap(char c) {
@@ -30,6 +31,8 @@ public class Kata {
     }
 
     protected static int countChar(char c, String str) {
-        return (int) str.chars().filter(n -> n == c).count();
+        char lowerChar = Character.toLowerCase(c);
+        String lowerStr = str.toLowerCase(Locale.ROOT);
+        return (int) lowerStr.chars().filter(n -> n == lowerChar).count();
     }
 }
